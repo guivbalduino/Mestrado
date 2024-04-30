@@ -28,12 +28,17 @@ def processar_arquivos_csv(data_inicio, data_fim):
                 
                 # Filtrar os dados dentro do intervalo de datas especificado
                 df['Data Medicao'] = pd.to_datetime(df['Data Medicao'])
-                df = df[(df['Data Medicao'] >= data_inicio) & (df['Data Medicao'] <= data_fim)]
+                df = df[(df['Data Medicao'] < data_inicio) | (df['Data Medicao'] > data_fim)]
                 
                 if not df.empty:
                     todos_os_dataframes.append(df)
             except pd.errors.ParserError:
                 print(f"Erro ao analisar o arquivo {arquivo}. Verifique o formato dos dados.")
+
+
+    # Verifique se há dados disponíveis
+    if not todos_os_dataframes:
+        return pd.DataFrame()  # Retorna um DataFrame vazio se não houver dados
 
     # Unifique todos os DataFrames em um único DataFrame
     df_final = pd.concat(todos_os_dataframes)
@@ -66,7 +71,7 @@ def processar_arquivos_csv(data_inicio, data_fim):
     return df_final
 
 # Exemplo de uso da função
-data_inicio = '2024-01-01'
-data_fim = '2024-01-31'
+data_inicio = '2024-04-30'
+data_fim = '2024-04-30'
 df_final = processar_arquivos_csv(data_inicio, data_fim)
 print(df_final)
