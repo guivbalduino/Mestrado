@@ -1,3 +1,5 @@
 \venv
 *.csv
 \hivemq
+*.msi
+\__pycache__
