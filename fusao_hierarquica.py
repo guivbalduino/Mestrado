@@ -1,0 +1,85 @@
+from pymongo import MongoClient
+from sklearn.cluster import Birch
+import pandas as pd
+from datetime import datetime
+
+# Parâmetros do algoritmo BIRCH
+branching_factor = 50
+n_clusters = None
+threshold = 0.5
+compute_labels = True
+
+# Conectando ao MongoDB
+client = MongoClient('localhost', 27017)
+db = client['dados']  # Banco de dados
+
+# Obtenha a data e hora atual
+data_hora_atual = datetime.now()
+
+# Crie o nome da coleção com base na data e hora atual
+nome_colecao = "fusao_hier_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+
+# Coleção para armazenar os resultados
+colecao_resultado = db[nome_colecao]
+
+# Coleção para armazenar as informações sobre as fusões
+colecao_fusoes = db['fusoes']
+
+# Coleções de dados originais
+colecao_inmet = db['inmet']
+colecao_libelium = db['libelium']
+
+# Projetar e recuperar apenas as colunas necessárias para cada coleção
+projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1}
+
+dados_inmet = list(colecao_inmet.find({}, projecao))
+dados_libelium = list(colecao_libelium.find({}, projecao))
+
+# Converter para DataFrames
+df_inmet = pd.DataFrame(dados_inmet)
+df_libelium = pd.DataFrame(dados_libelium)
+
+# Concatenar os DataFrames
+df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
+
+# Excluir colunas não numéricas ou não relevantes para o clustering (.copy usado para)
+df_cluster = df_concatenado[['temperature_C', 'humidity_percent', 'pressure_hPa']].copy()
+
+# Remover linhas com valores ausentes
+df_cluster.dropna(inplace=True)
+
+# Contar a quantidade de dados utilizados
+quantidade_dados_utilizados = len(df_cluster)
+
+# Realizar o clustering hierárquico usando BIRCH
+inicio_fusao = datetime.now()
+brc = Birch(branching_factor=branching_factor, n_clusters=n_clusters, threshold=threshold, compute_labels=compute_labels)
+brc.fit(df_cluster)
+fim_fusao = datetime.now()
+tempo_fusao = fim_fusao - inicio_fusao
+
+# Adicionar rótulos de cluster ao DataFrame original
+df_concatenado['cluster_label'] = brc.labels_
+
+# Armazenar os resultados na coleção correspondente no MongoDB
+inicio_armazenamento = datetime.now()
+colecao_resultado.insert_many(df_concatenado.to_dict(orient='records'))
+fim_armazenamento = datetime.now()
+tempo_armazenamento = fim_armazenamento - inicio_armazenamento
+
+# Armazenar informações sobre a fusão no banco de dados "fusoes"
+info_fusao = {
+    "nome_fusao": "birch",
+    "tipo_fusao": "hierarquica",
+    "branching_factor": branching_factor,
+    "n_clusters": n_clusters,
+    "threshold": threshold,
+    "compute_labels": compute_labels,
+    "quantidade_dados_utilizados": quantidade_dados_utilizados,
+    "tempo_fusao_segundos": tempo_fusao.total_seconds(),
+    "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
+    "data_hora": data_hora_atual  # Adicionando a data e hora atual
+}
+colecao_fusoes.insert_one(info_fusao)
+
+print("Fusão hierárquica concluída e resultados armazenados na coleção:", nome_colecao)

@@ -71,6 +71,13 @@ def processar_arquivos_csv(data_inicio, data_fim):
     # Substitua espaços nos cabeçalhos por underscores
     df_final.columns = df_final.columns.str.replace(' ', '_')
 
+    df_final.rename(columns={
+    'PRESSAO_ATMOSFERICA_AO_NIVEL_DA_ESTACAO,_HORARIA(mB)': 'pressure_hPa',
+    'TEMPERATURA_DO_AR_-_BULBO_SECO,_HORARIA(°C)': 'temperature_C',
+    'UMIDADE_RELATIVA_DO_AR,_HORARIA(%)': 'humidity_percent',
+    'Data_Hora': 'timestamp'
+    }, inplace=True)
+
     return df_final
 
 # Exemplo de uso da função

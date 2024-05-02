@@ -11,24 +11,21 @@ client = MongoClient('localhost', 27017)  # Conecte-se ao MongoDB local
 db = client['dados']  # Banco de dados
 
 # Adiciona os do inmet
-'''
+
 colecao = db['inmet']  # Coleção
 
 # Encontre a data de início mais antiga e a data de fim mais recente presentes no banco de dados
-primeiro_registro = colecao.find_one({}, sort=[("Data_Hora", 1)])
-ultimo_registro = colecao.find_one({}, sort=[("Data_Hora", -1)])
+primeiro_registro = colecao.find_one({}, sort=[("timestamp", 1)])
+ultimo_registro = colecao.find_one({}, sort=[("timestamp", -1)])
 
 if primeiro_registro is None or ultimo_registro is None:
     print("Banco de dados está vazio. Definindo intervalo de datas de 1º de janeiro de 2010 até ontem.")
     data_inicio = datetime.now()
     data_fim = datetime.now()
 else:
-    data_inicio_db = primeiro_registro["Data_Hora"]
-    data_fim_db = ultimo_registro["Data_Hora"]
+    data_inicio = primeiro_registro["timestamp"]
+    data_fim = ultimo_registro["timestamp"]
 
-    # Defina o intervalo de datas desejado com base nos dados já presentes no banco de dados
-    data_inicio = data_inicio_db.strftime('%Y-%m-%d')
-    data_fim = data_fim_db.strftime('%Y-%m-%d')
 
 # Chame a função para processar os arquivos CSV
 df_final = pac_inmet(data_inicio, data_fim)
@@ -46,7 +43,6 @@ else:
 
     print(f"Foram inseridos {len(resultado.inserted_ids)} registros na coleção 'inmet' do banco de dados 'dados' no MongoDB.")
 
-'''
 # Adiciona os do libelium
 
 
