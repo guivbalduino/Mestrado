@@ -68,6 +68,9 @@ def processar_arquivos_csv(data_inicio, data_fim):
         if coluna != 'Data Hora':
             df_final[coluna] = pd.to_numeric(df_final[coluna], errors='coerce')
 
+    # Substitua espaços nos cabeçalhos por underscores
+    df_final.columns = df_final.columns.str.replace(' ', '_')
+
     return df_final
 
 # Exemplo de uso da função
