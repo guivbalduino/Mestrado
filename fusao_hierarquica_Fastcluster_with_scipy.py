@@ -5,6 +5,15 @@ from datetime import datetime
 import fastcluster
 from scipy.cluster.hierarchy import fcluster
 
+
+'''
+Para utilizar o Fastcluster, que é uma biblioteca mais eficiente para realizar clustering hierárquico, 
+você pode ajustar o código da seguinte forma. 
+
+Fastcluster é geralmente utilizado em combinação com SciPy para realizar a fusão hierárquica
+ e obter os rótulos dos clusters. Abaixo está a utilização:
+'''
+
 # Parâmetros do algoritmo Fastcluster
 n_clusters = 5  # Define o número de clusters
 linkage_method = 'ward'  # Método de ligação para calcular a distância entre os clusters
