@@ -1,12 +1,7 @@
-'''
-montar com os dados completos escolhendo as colunas para testar se 
-funciona com dados ausentes, ou seja, concatena as bases e escolhe colunas
-'''
-
-
-
 from pymongo import MongoClient
-from prophet import Prophet
+from sktime.forecasting.arima import ARIMA
+from sktime.forecasting.model_selection import temporal_train_test_split
+from sktime.forecasting.base import ForecastingHorizon
 import pandas as pd
 from datetime import datetime
 
@@ -18,7 +13,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temporal_prophet_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temporal_arima_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -52,21 +47,23 @@ df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
 # Remover linhas com valores ausentes
 df_resampled.dropna(inplace=True)
 
-# Função para aplicar o modelo Prophet a uma coluna específica
-def aplicar_prophet(df, coluna):
-    df_prophet = df[['timestamp', coluna]].rename(columns={'timestamp': 'ds', coluna: 'y'})
-    modelo = Prophet()
-    modelo.fit(df_prophet)
-    future = modelo.make_future_dataframe(periods=24, freq='H')  # Prever próximas 24 horas
-    forecast = modelo.predict(future)
-    return forecast[['ds', 'yhat']].rename(columns={'ds': 'timestamp', 'yhat': f'{coluna}_forecast'})
+# Função para aplicar o modelo ARIMA a uma coluna específica
+def aplicar_arima(df, coluna):
+    y = df[coluna]
+    y_train, y_test = temporal_train_test_split(y, test_size=24)
+    forecaster = ARIMA(order=(5, 1, 0))
+    forecaster.fit(y_train)
+    fh = ForecastingHorizon(y_test.index, is_relative=False)
+    previsao = forecaster.predict(fh)
+    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_arima_forecast'])
+    return previsao_df
 
-# Aplicar o modelo Prophet às colunas de interesse
+# Aplicar o modelo ARIMA às colunas de interesse
 inicio_fusao = datetime.now()
 forecasts = []
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast = aplicar_prophet(df_resampled.reset_index(), coluna)
-    forecasts.append(forecast.set_index('timestamp'))
+    forecast_arima = aplicar_arima(df_resampled, coluna)
+    forecasts.append(forecast_arima)
 
 # Concatenar previsões no DataFrame original
 df_forecast = pd.concat(forecasts, axis=1)
@@ -85,17 +82,13 @@ tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
 # Armazenar informações sobre a fusão no banco de dados "fusoes"
 info_fusao = {
-    "nome_fusao": "prophet_forecasting",
+    "nome_fusao": "arima_forecasting",
     "tipo_fusao": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
     "tempo_fusao_segundos": tempo_fusao.total_seconds(),
     "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
-    "data_hora": data_hora_atual,  # Adicionando a data e hora atual
-    "prophet_params": {
-        "periods": 24,
-        "freq": 'H'
-    }
+    "data_hora": data_hora_atual  # Adicionando a data e hora atual
 }
 colecao_fusoes.insert_one(info_fusao)
 
-print("Fusão temporal Prophet concluída e resultados armazenados na coleção:", nome_colecao)
+print("Fusão temporal ARIMA concluída e resultados armazenados na coleção:", nome_colecao)

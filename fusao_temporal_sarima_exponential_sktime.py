@@ -1,12 +1,8 @@
-'''
-montar com os dados completos escolhendo as colunas para testar se 
-funciona com dados ausentes, ou seja, concatena as bases e escolhe colunas
-'''
-
-
-
 from pymongo import MongoClient
-from prophet import Prophet
+from sktime.forecasting.arima import AutoARIMA
+from sktime.forecasting.exp_smoothing import ExponentialSmoothing
+from sktime.forecasting.model_selection import temporal_train_test_split
+from sktime.forecasting.base import ForecastingHorizon
 import pandas as pd
 from datetime import datetime
 
@@ -18,7 +14,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temporal_prophet_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temporal_sarima_expsmooth_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -52,21 +48,32 @@ df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
 # Remover linhas com valores ausentes
 df_resampled.dropna(inplace=True)
 
-# Função para aplicar o modelo Prophet a uma coluna específica
-def aplicar_prophet(df, coluna):
-    df_prophet = df[['timestamp', coluna]].rename(columns={'timestamp': 'ds', coluna: 'y'})
-    modelo = Prophet()
-    modelo.fit(df_prophet)
-    future = modelo.make_future_dataframe(periods=24, freq='H')  # Prever próximas 24 horas
-    forecast = modelo.predict(future)
-    return forecast[['ds', 'yhat']].rename(columns={'ds': 'timestamp', 'yhat': f'{coluna}_forecast'})
+# Função para aplicar o modelo SARIMA e ExponentialSmoothing a uma coluna específica
+def aplicar_sarima_e_expsmooth(df, coluna):
+    y = df[coluna]
+    y_train, y_test = temporal_train_test_split(y, test_size=24)
+    
+    # Aplicar SARIMA
+    forecaster_sarima = AutoARIMA(sp=12, seasonal=True, suppress_warnings=True)
+    forecaster_sarima.fit(y_train)
+    fh = ForecastingHorizon(y_test.index, is_relative=False)
+    previsao_sarima = forecaster_sarima.predict(fh)
+    previsao_sarima_df = pd.DataFrame(previsao_sarima, columns=[f'{coluna}_sarima_forecast'])
+    
+    # Aplicar ExponentialSmoothing
+    forecaster_expsmooth = ExponentialSmoothing(trend="add", seasonal="add", sp=12)
+    forecaster_expsmooth.fit(y_train)
+    previsao_expsmooth = forecaster_expsmooth.predict(fh)
+    previsao_expsmooth_df = pd.DataFrame(previsao_expsmooth, columns=[f'{coluna}_expsmooth_forecast'])
+    
+    return pd.concat([previsao_sarima_df, previsao_expsmooth_df], axis=1)
 
-# Aplicar o modelo Prophet às colunas de interesse
+# Aplicar os modelos às colunas de interesse
 inicio_fusao = datetime.now()
 forecasts = []
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast = aplicar_prophet(df_resampled.reset_index(), coluna)
-    forecasts.append(forecast.set_index('timestamp'))
+    forecast_sarima_expsmooth = aplicar_sarima_e_expsmooth(df_resampled, coluna)
+    forecasts.append(forecast_sarima_expsmooth)
 
 # Concatenar previsões no DataFrame original
 df_forecast = pd.concat(forecasts, axis=1)
@@ -85,17 +92,13 @@ tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
 # Armazenar informações sobre a fusão no banco de dados "fusoes"
 info_fusao = {
-    "nome_fusao": "prophet_forecasting",
+    "nome_fusao": "sarima_expsmooth_forecasting",
     "tipo_fusao": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
     "tempo_fusao_segundos": tempo_fusao.total_seconds(),
     "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
-    "data_hora": data_hora_atual,  # Adicionando a data e hora atual
-    "prophet_params": {
-        "periods": 24,
-        "freq": 'H'
-    }
+    "data_hora": data_hora_atual  # Adicionando a data e hora atual
 }
 colecao_fusoes.insert_one(info_fusao)
 
-print("Fusão temporal Prophet concluída e resultados armazenados na coleção:", nome_colecao)
+print("Fusão temporal SARIMA e ExponentialSmoothing concluída e resultados armazenados na coleção:", nome_colecao)
