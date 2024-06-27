@@ -13,7 +13,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temporal_sarima_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temp_sarima_sktime_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -41,8 +41,8 @@ df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 # Transformar a coluna de timestamp para datetime
 df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 
-# Resample dos dados para uma frequência uniforme (exemplo: 1 hora)
-df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
+# Resample dos dados para uma frequência uniforme (exemplo: diário em vez de horário)
+df_resampled = df_concatenado.set_index('timestamp').resample('D').mean()
 
 # Remover linhas com valores ausentes
 df_resampled.dropna(inplace=True)
@@ -50,10 +50,11 @@ df_resampled.dropna(inplace=True)
 # Função para aplicar o modelo SARIMA a uma coluna específica
 def aplicar_sarima(df, coluna):
     y = df[coluna]
-    y_train, y_test = temporal_train_test_split(y, test_size=24)
-    forecaster = AutoARIMA(sp=12, seasonal=True, suppress_warnings=True)
+    # Redução da janela de previsão
+    y_train, y_test = temporal_train_test_split(y, test_size=7)
+    forecaster = AutoARIMA(sp=7, seasonal=True, suppress_warnings=True)
     forecaster.fit(y_train)
-    fh = ForecastingHorizon(y_test.index, is_relative=False)
+    fh = ForecastingHorizon(y_test.index, is_relative=False, freq='D')
     previsao = forecaster.predict(fh)
     previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_sarima_forecast'])
     return previsao_df

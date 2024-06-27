@@ -6,6 +6,14 @@ from sktime.forecasting.base import ForecastingHorizon
 import pandas as pd
 from datetime import datetime
 
+# Area das variaveis
+trend = "add"
+resample = 'D'
+num_resampled = 1000
+seasonal = "add"
+sp = 12
+
+
 # Conectando ao MongoDB
 client = MongoClient('localhost', 27017)
 db = client['dados']  # Banco de dados
@@ -14,7 +22,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temporal_sarima_expsmooth_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temp_sarima_exp_smoothing_sktime_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -42,11 +50,17 @@ df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 # Transformar a coluna de timestamp para datetime
 df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 
-# Resample dos dados para uma frequência uniforme (exemplo: 1 hora)
-df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
+# Resample dos dados para uma frequência uniforme (exemplo: 1 dia)
+df_resampled = df_concatenado.set_index('timestamp').resample('D').mean()
 
-# Remover linhas com valores ausentes
+# Interpolar os valores ausentes para preencher a frequência
+df_resampled.interpolate(method='time', inplace=True)
+
+# Remover linhas que ainda possuem valores ausentes após a interpolação
 df_resampled.dropna(inplace=True)
+
+# Usar uma amostra menor dos dados (por exemplo, os últimos 1000 registros)
+df_resampled = df_resampled.iloc[-num_resampled:]
 
 # Função para aplicar o modelo SARIMA e ExponentialSmoothing a uma coluna específica
 def aplicar_sarima_e_expsmooth(df, coluna):

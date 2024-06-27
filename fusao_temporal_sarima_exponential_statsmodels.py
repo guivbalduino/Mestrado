@@ -12,7 +12,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temporal_sarima_exp_smoothing_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temp_sarima_es_statsmodels_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -43,41 +43,30 @@ df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 # Resample dos dados para uma frequência uniforme (exemplo: 1 hora)
 df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
 
-# Remover linhas com valores ausentes
+# Interpolar os valores ausentes para preencher a frequência
+df_resampled.interpolate(method='time', inplace=True)
+
+# Remover linhas que ainda possuem valores ausentes após a interpolação
 df_resampled.dropna(inplace=True)
 
-# Função para aplicar o modelo SARIMA a uma coluna específica
-def aplicar_sarima(df, coluna, ordem=(1, 1, 1), sazonal_ordem=(1, 1, 1, 12)):
-    modelo = SARIMAX(df[coluna], order=ordem, seasonal_order=sazonal_ordem)
-    modelo_fit = modelo.fit(disp=False)
-    previsao = modelo_fit.forecast(steps=24)  # Prever próximas 24 horas
-    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_sarima_forecast'])
-    previsao_df.index = pd.date_range(start=df.index[-1], periods=25, freq='H')[1:]  # Ajustar o índice
-    return previsao_df
+# Função para ajustar o modelo SARIMA e Exponential Smoothing a uma coluna específica
+def ajustar_sarima_es(df, coluna, sarima_ordem=(1, 1, 1), sarima_sazonal=(1, 1, 1, 24), es_tendencia='add', es_sazonal='add'):
+    # Ajustar modelo SARIMA
+    modelo_sarima = SARIMAX(df[coluna], order=sarima_ordem, seasonal_order=sarima_sazonal)
+    modelo_sarima_fit = modelo_sarima.fit(disp=False)
+    df[f'{coluna}_sarima_adjusted'] = modelo_sarima_fit.fittedvalues
 
-# Função para aplicar o modelo Exponential Smoothing a uma coluna específica
-def aplicar_exponential_smoothing(df, coluna):
-    modelo = ExponentialSmoothing(df[coluna], seasonal='add', seasonal_periods=12)
-    modelo_fit = modelo.fit()
-    previsao = modelo_fit.forecast(steps=24)  # Prever próximas 24 horas
-    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_exp_smoothing_forecast'])
-    previsao_df.index = pd.date_range(start=df.index[-1], periods=25, freq='H')[1:]  # Ajustar o índice
-    return previsao_df
+    # Ajustar modelo Exponential Smoothing
+    modelo_es = ExponentialSmoothing(df[coluna], trend=es_tendencia, seasonal=es_sazonal, seasonal_periods=24)
+    modelo_es_fit = modelo_es.fit()
+    df[f'{coluna}_es_adjusted'] = modelo_es_fit.fittedvalues
 
-# Aplicar os modelos SARIMA e Exponential Smoothing às colunas de interesse
+    return df
+
+# Ajustar os modelos SARIMA e Exponential Smoothing às colunas de interesse
 inicio_fusao = datetime.now()
-forecasts = []
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast_sarima = aplicar_sarima(df_resampled, coluna)
-    forecast_exp_smoothing = aplicar_exponential_smoothing(df_resampled, coluna)
-    forecasts.append(forecast_sarima)
-    forecasts.append(forecast_exp_smoothing)
-
-# Concatenar previsões no DataFrame original
-df_forecast = pd.concat(forecasts, axis=1)
-
-# Adicionar previsões ao DataFrame original reamostrado
-df_resampled = df_resampled.join(df_forecast)
+    df_resampled = ajustar_sarima_es(df_resampled, coluna)
 
 fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
@@ -90,15 +79,18 @@ tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
 # Armazenar informações sobre a fusão no banco de dados "fusoes"
 info_fusao = {
-    "nome_fusao": "sarima_exp_smoothing_forecasting",
+    "nome_fusao": "sarima_es_fusion",
     "tipo_fusao": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
     "tempo_fusao_segundos": tempo_fusao.total_seconds(),
     "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
     "data_hora": data_hora_atual,  # Adicionando a data e hora atual
     "sarima_order": (1, 1, 1),
-    "sarima_seasonal_order": (1, 1, 1, 12)
+    "sarima_seasonal_order": (1, 1, 1, 24),
+    "es_tendencia": "add",
+    "es_sazonalidade": "add",
+    "es_sazonal_periodo": 24
 }
 colecao_fusoes.insert_one(info_fusao)
 
-print("Fusão temporal SARIMA com Exponential Smoothing concluída e resultados armazenados na coleção:", nome_colecao)
+print("Fusão temporal SARIMA + Exponential Smoothing (statsmodels) concluída e resultados armazenados na coleção:", nome_colecao)

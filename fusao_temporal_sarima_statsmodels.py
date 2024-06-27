@@ -11,7 +11,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temporal_sarima_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temp_sarima_statsmodels_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -42,30 +42,23 @@ df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 # Resample dos dados para uma frequência uniforme (exemplo: 1 hora)
 df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
 
-# Remover linhas com valores ausentes
+# Interpolar os valores ausentes para preencher a frequência
+df_resampled.interpolate(method='time', inplace=True)
+
+# Remover linhas que ainda possuem valores ausentes após a interpolação
 df_resampled.dropna(inplace=True)
 
-# Função para aplicar o modelo SARIMA a uma coluna específica
-def aplicar_sarima(df, coluna, ordem=(1, 1, 1), sazonal_ordem=(1, 1, 1, 12)):
+# Função para ajustar o modelo SARIMA aos dados
+def ajustar_sarima(df, coluna, ordem=(1, 1, 1), sazonal_ordem=(1, 1, 1, 12)):
     modelo = SARIMAX(df[coluna], order=ordem, seasonal_order=sazonal_ordem)
     modelo_fit = modelo.fit(disp=False)
-    previsao = modelo_fit.forecast(steps=24)  # Prever próximas 24 horas
-    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_forecast'])
-    previsao_df.index = pd.date_range(start=df.index[-1], periods=25, freq='H')[1:]  # Ajustar o índice
-    return previsao_df
+    df[f'{coluna}_sarima_adjusted'] = modelo_fit.fittedvalues
+    return df
 
-# Aplicar o modelo SARIMA às colunas de interesse
+# Ajustar o modelo SARIMA às colunas de interesse
 inicio_fusao = datetime.now()
-forecasts = []
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast = aplicar_sarima(df_resampled, coluna)
-    forecasts.append(forecast)
-
-# Concatenar previsões no DataFrame original
-df_forecast = pd.concat(forecasts, axis=1)
-
-# Adicionar previsões ao DataFrame original reamostrado
-df_resampled = df_resampled.join(df_forecast)
+    df_resampled = ajustar_sarima(df_resampled, coluna)
 
 fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
@@ -78,7 +71,7 @@ tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
 # Armazenar informações sobre a fusão no banco de dados "fusoes"
 info_fusao = {
-    "nome_fusao": "sarima_forecasting",
+    "nome_fusao": "sarima_fusion",
     "tipo_fusao": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
     "tempo_fusao_segundos": tempo_fusao.total_seconds(),

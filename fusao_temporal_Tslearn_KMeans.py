@@ -16,7 +16,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temporal_tslearn_tskmeans_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temp_tslearn_tskmeans_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]

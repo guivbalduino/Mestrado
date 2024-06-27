@@ -13,7 +13,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temporal_arima_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temp_arima_sktime_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -44,7 +44,10 @@ df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 # Resample dos dados para uma frequência uniforme (exemplo: 1 hora)
 df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
 
-# Remover linhas com valores ausentes
+# Interpolar os valores ausentes para preencher a frequência
+df_resampled.interpolate(method='time', inplace=True)
+
+# Remover linhas que ainda possuem valores ausentes após a interpolação
 df_resampled.dropna(inplace=True)
 
 # Função para aplicar o modelo ARIMA a uma coluna específica
