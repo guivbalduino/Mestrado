@@ -1,9 +1,12 @@
 from pymongo import MongoClient
 from sktime.forecasting.arima import ARIMA
-from sktime.forecasting.model_selection import temporal_train_test_split
-from sktime.forecasting.base import ForecastingHorizon
 import pandas as pd
 from datetime import datetime
+
+# Definições dos parâmetros
+arima_order = (5, 1, 0)
+freq_resample = 'H'
+tipo_tratamento = 'interpolacao'  # Pode ser 'interpolacao' ou 'dropna'
 
 # Conectando ao MongoDB
 client = MongoClient('localhost', 27017)
@@ -41,38 +44,29 @@ df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 # Transformar a coluna de timestamp para datetime
 df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 
-# Resample dos dados para uma frequência uniforme (exemplo: 1 hora)
-df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
+# Resample dos dados para uma frequência uniforme
+df_resampled = df_concatenado.set_index('timestamp').resample(freq_resample).mean()
 
-# Interpolar os valores ausentes para preencher a frequência
-df_resampled.interpolate(method='time', inplace=True)
-
-# Remover linhas que ainda possuem valores ausentes após a interpolação
-df_resampled.dropna(inplace=True)
+# Tratar valores ausentes com base no tipo de tratamento
+if tipo_tratamento == 'interpolacao':
+    # Interpolar os valores ausentes para preencher a frequência
+    df_resampled.interpolate(method='time', inplace=True)
+else:
+    # Remover linhas que possuem valores ausentes
+    df_resampled.dropna(inplace=True)
 
 # Função para aplicar o modelo ARIMA a uma coluna específica
-def aplicar_arima(df, coluna):
+def aplicar_arima(df, coluna, order):
     y = df[coluna]
-    y_train, y_test = temporal_train_test_split(y, test_size=24)
-    forecaster = ARIMA(order=(5, 1, 0))
-    forecaster.fit(y_train)
-    fh = ForecastingHorizon(y_test.index, is_relative=False)
-    previsao = forecaster.predict(fh)
-    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_arima_forecast'])
-    return previsao_df
+    forecaster = ARIMA(order=order)
+    forecaster.fit(y)
+    return forecaster
 
 # Aplicar o modelo ARIMA às colunas de interesse
 inicio_fusao = datetime.now()
-forecasts = []
+arima_models = {}
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast_arima = aplicar_arima(df_resampled, coluna)
-    forecasts.append(forecast_arima)
-
-# Concatenar previsões no DataFrame original
-df_forecast = pd.concat(forecasts, axis=1)
-
-# Adicionar previsões ao DataFrame original reamostrado
-df_resampled = df_resampled.join(df_forecast)
+    arima_models[coluna] = aplicar_arima(df_resampled, coluna, arima_order)
 
 fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
@@ -83,15 +77,18 @@ colecao_resultado.insert_many(df_resampled.reset_index().to_dict(orient='records
 fim_armazenamento = datetime.now()
 tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
-# Armazenar informações sobre a fusão no banco de dados "fusoes"
-info_fusao = {
-    "nome_fusao": "arima_forecasting",
-    "tipo_fusao": "temporal",
+# Armazenar informações sobre a modelagem no banco de dados "fusoes"
+info_modelagem = {
+    "nome_modelagem": "arima_sktime",
+    "tipo_modelagem": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
-    "tempo_fusao_segundos": tempo_fusao.total_seconds(),
+    "tempo_modelagem_segundos": tempo_fusao.total_seconds(),
     "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
-    "data_hora": data_hora_atual  # Adicionando a data e hora atual
+    "data_hora": data_hora_atual,  # Adicionando a data e hora atual
+    "arima_order": arima_order,
+    "freq_resample": freq_resample,
+    "tipo_tratamento": tipo_tratamento
 }
-colecao_fusoes.insert_one(info_fusao)
+colecao_fusoes.insert_one(info_modelagem)
 
-print("Fusão temporal ARIMA concluída e resultados armazenados na coleção:", nome_colecao)
+print("Modelagem ARIMA (sktime) concluída e resultados armazenados na coleção:", nome_colecao)
