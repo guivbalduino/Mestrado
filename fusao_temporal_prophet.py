@@ -99,3 +99,4 @@ info_fusao = {
 colecao_fusoes.insert_one(info_fusao)
 
 print("Fusão temporal Prophet concluída e resultados armazenados na coleção:", nome_colecao)
+

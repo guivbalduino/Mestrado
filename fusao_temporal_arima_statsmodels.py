@@ -1,7 +1,12 @@
 from pymongo import MongoClient
-from statsmodels.tsa.arima.model import ARIMA
 import pandas as pd
 from datetime import datetime
+from statsmodels.tsa.arima.model import ARIMA
+
+# Definições dos parâmetros ARIMA
+order = (5, 1, 0)         # (p, d, q)
+freq_resample = 'H'
+tipo_tratamento = 'interpolacao'  # Pode ser 'interpolacao' ou 'dropna'
 
 # Conectando ao MongoDB
 client = MongoClient('localhost', 27017)
@@ -39,35 +44,31 @@ df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 # Transformar a coluna de timestamp para datetime
 df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 
-# Resample dos dados para uma frequência uniforme (exemplo: 1 hora)
-df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
+# Resample dos dados para uma frequência uniforme
+df_resampled = df_concatenado.set_index('timestamp').resample(freq_resample).mean()
 
-# Interpolar os valores ausentes para preencher a frequência
-df_resampled.interpolate(method='time', inplace=True)
-
-# Remover linhas que ainda possuem valores ausentes após a interpolação
-df_resampled.dropna(inplace=True)
+# Tratar valores ausentes com base no tipo de tratamento
+if tipo_tratamento == 'interpolacao':
+    # Interpolar os valores ausentes para preencher a frequência
+    df_resampled.interpolate(method='time', inplace=True)
+elif tipo_tratamento == 'dropna':
+    # Remover linhas que possuem valores ausentes
+    df_resampled.dropna(inplace=True)
+else:
+    raise ValueError("tipo_tratamento deve ser 'interpolacao' ou 'dropna'")
 
 # Função para aplicar o modelo ARIMA a uma coluna específica
-def aplicar_arima(df, coluna, ordem=(5, 1, 0)):
-    modelo = ARIMA(df[coluna], order=ordem)
-    modelo_fit = modelo.fit()
-    previsao = modelo_fit.forecast(steps=24)[0]  # Prever próximas 24 horas
-    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_arima_forecast'], index=pd.date_range(start=df.index[-1], periods=25, freq='H')[1:])
-    return previsao_df
+def aplicar_arima(df, coluna, order):
+    y = df[coluna]
+    mod = ARIMA(y, order=order)
+    result = mod.fit()
+    return result
 
 # Aplicar o modelo ARIMA às colunas de interesse
 inicio_fusao = datetime.now()
-forecasts = []
+arima_models = {}
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast_arima = aplicar_arima(df_resampled, coluna)
-    forecasts.append(forecast_arima)
-
-# Concatenar previsões no DataFrame original
-df_forecast = pd.concat(forecasts, axis=1)
-
-# Adicionar previsões ao DataFrame original reamostrado
-df_resampled = df_resampled.join(df_forecast)
+    arima_models[coluna] = aplicar_arima(df_resampled, coluna, order)
 
 fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
@@ -78,15 +79,18 @@ colecao_resultado.insert_many(df_resampled.reset_index().to_dict(orient='records
 fim_armazenamento = datetime.now()
 tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
-# Armazenar informações sobre a fusão no banco de dados "fusoes"
-info_fusao = {
-    "nome_fusao": "arima_forecasting",
-    "tipo_fusao": "temporal",
+# Armazenar informações sobre a modelagem no banco de dados "fusoes"
+info_modelagem = {
+    "nome_modelagem": "arima_statsmodels",
+    "tipo_modelagem": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
-    "tempo_fusao_segundos": tempo_fusao.total_seconds(),
+    "tempo_modelagem_segundos": tempo_fusao.total_seconds(),
     "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
-    "data_hora": data_hora_atual  # Adicionando a data e hora atual
+    "data_hora": data_hora_atual,  # Adicionando a data e hora atual
+    "arima_order": order,
+    "freq_resample": freq_resample,
+    "tipo_tratamento": tipo_tratamento
 }
-colecao_fusoes.insert_one(info_fusao)
+colecao_fusoes.insert_one(info_modelagem)
 
-print("Fusão temporal ARIMA statsmodels concluída e resultados armazenados na coleção:", nome_colecao)
+print("Modelagem ARIMA (statsmodels) concluída e resultados armazenados na coleção:", nome_colecao)

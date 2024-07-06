@@ -1,9 +1,17 @@
+import socket
 from pymongo import MongoClient
-from sktime.forecasting.arima import AutoARIMA
-from sktime.forecasting.model_selection import temporal_train_test_split
-from sktime.forecasting.base import ForecastingHorizon
+from sktime.forecasting.arima import ARIMA
 import pandas as pd
 from datetime import datetime
+
+# Definições dos parâmetros
+arima_order = (5, 1, 0)
+seasonal_order = (1, 1, 1, 12)  # Definindo a ordem sazonal diretamente
+freq_resample = 'H'
+tipo_tratamento = 'interpolacao'  # Pode ser 'interpolacao' ou 'dropna'
+
+# Obter o nome do computador
+hostname = socket.gethostname()
 
 # Conectando ao MongoDB
 client = MongoClient('localhost', 27017)
@@ -41,36 +49,31 @@ df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 # Transformar a coluna de timestamp para datetime
 df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 
-# Resample dos dados para uma frequência uniforme (exemplo: diário em vez de horário)
-df_resampled = df_concatenado.set_index('timestamp').resample('D').mean()
+# Resample dos dados para uma frequência uniforme
+df_resampled = df_concatenado.set_index('timestamp').resample(freq_resample).mean()
 
-# Remover linhas com valores ausentes
-df_resampled.dropna(inplace=True)
+# Tratar valores ausentes com base no tipo de tratamento
+if tipo_tratamento == 'interpolacao':
+    # Interpolar os valores ausentes para preencher a frequência
+    df_resampled.interpolate(method='time', inplace=True)
+elif tipo_tratamento == 'dropna':
+    # Remover linhas que possuem valores ausentes
+    df_resampled.dropna(inplace=True)
+else:
+    raise ValueError("tipo_tratamento deve ser 'interpolacao' ou 'dropna'")
 
 # Função para aplicar o modelo SARIMA a uma coluna específica
-def aplicar_sarima(df, coluna):
+def aplicar_sarima(df, coluna, order, seasonal_order):
     y = df[coluna]
-    # Redução da janela de previsão
-    y_train, y_test = temporal_train_test_split(y, test_size=7)
-    forecaster = AutoARIMA(sp=7, seasonal=True, suppress_warnings=True)
-    forecaster.fit(y_train)
-    fh = ForecastingHorizon(y_test.index, is_relative=False, freq='D')
-    previsao = forecaster.predict(fh)
-    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_sarima_forecast'])
-    return previsao_df
+    forecaster = ARIMA(order=order, seasonal_order=seasonal_order, suppress_warnings=True)
+    forecaster.fit(y)
+    return forecaster
 
 # Aplicar o modelo SARIMA às colunas de interesse
 inicio_fusao = datetime.now()
-forecasts = []
+sarima_models = {}
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast_sarima = aplicar_sarima(df_resampled, coluna)
-    forecasts.append(forecast_sarima)
-
-# Concatenar previsões no DataFrame original
-df_forecast = pd.concat(forecasts, axis=1)
-
-# Adicionar previsões ao DataFrame original reamostrado
-df_resampled = df_resampled.join(df_forecast)
+    sarima_models[coluna] = aplicar_sarima(df_resampled, coluna, arima_order, seasonal_order)
 
 fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
@@ -81,15 +84,28 @@ colecao_resultado.insert_many(df_resampled.reset_index().to_dict(orient='records
 fim_armazenamento = datetime.now()
 tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
-# Armazenar informações sobre a fusão no banco de dados "fusoes"
-info_fusao = {
-    "nome_fusao": "sarima_forecasting",
-    "tipo_fusao": "temporal",
+# Armazenar informações sobre a modelagem no banco de dados "fusoes"
+info_modelagem = {
+    "nome_modelagem": "sarima_sktime",
+    "tipo_modelagem": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
-    "tempo_fusao_segundos": tempo_fusao.total_seconds(),
+    "tempo_modelagem_segundos": tempo_fusao.total_seconds(),
     "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
-    "data_hora": data_hora_atual  # Adicionando a data e hora atual
+    "data_hora": data_hora_atual,  # Adicionando a data e hora atual
+    "arima_order": arima_order,
+    "seasonal_order": seasonal_order,
+    "freq_resample": freq_resample,
+    "tipo_tratamento": tipo_tratamento,
+    "hostname": hostname  # Adicionando o nome do computador
 }
-colecao_fusoes.insert_one(info_fusao)
+colecao_fusoes.insert_one(info_modelagem)
 
-print("Fusão temporal SARIMA concluída e resultados armazenados na coleção:", nome_colecao)
+print("Modelagem SARIMA (sktime) concluída e resultados armazenados na coleção:", nome_colecao)
+
+
+'''
+ ARIMA do sktime diretamente para definir os parâmetros de sazonalidade 
+ conforme desejado, sem depender do AutoARIMA, que tenta encontrar os 
+ melhores parâmetros automaticamente e pode ser mais custoso em termos 
+ de processamento
+'''

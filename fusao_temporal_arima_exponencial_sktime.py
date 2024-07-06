@@ -1,11 +1,17 @@
+import socket
 from pymongo import MongoClient
 from sktime.forecasting.arima import ARIMA
 from sktime.forecasting.exp_smoothing import ExponentialSmoothing
-from sktime.forecasting.model_selection import temporal_train_test_split
-from sktime.forecasting.base import ForecastingHorizon
 import pandas as pd
 from datetime import datetime
 
+# Definições dos parâmetros
+arima_order = (5, 1, 0)
+freq_resample = 'H'
+tipo_tratamento = 'interpolacao'  # Pode ser 'interpolacao' ou 'dropna'
+
+# Obter o nome do computador
+hostname = socket.gethostname()
 # Conectando ao MongoDB
 client = MongoClient('localhost', 27017)
 db = client['dados']  # Banco de dados
@@ -42,51 +48,36 @@ df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 # Transformar a coluna de timestamp para datetime
 df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 
-# Definir a frequência do índice de tempo ao reamostrar os dados
-df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
+# Resample dos dados para uma frequência uniforme
+df_resampled = df_concatenado.set_index('timestamp').resample(freq_resample).mean()
 
-# Interpolar os valores ausentes para preencher a frequência
-df_resampled.interpolate(method='time', inplace=True)
-
-# Remover linhas que ainda possuem valores ausentes após a interpolação
-df_resampled.dropna(inplace=True)
+# Tratar valores ausentes com base no tipo de tratamento
+if tipo_tratamento == 'interpolacao':
+    # Interpolar os valores ausentes para preencher a frequência
+    df_resampled.interpolate(method='time', inplace=True)
+elif tipo_tratamento == 'dropna':
+    # Remover linhas que possuem valores ausentes
+    df_resampled.dropna(inplace=True)
+else:
+    raise ValueError("tipo_tratamento deve ser 'interpolacao' ou 'dropna'")
 
 # Função para aplicar o modelo ARIMA a uma coluna específica
-def aplicar_arima(df, coluna):
+def aplicar_arima(df, coluna, order):
     y = df[coluna]
-    y_train, y_test = temporal_train_test_split(y, test_size=24)
-    forecaster = ARIMA(order=(5, 1, 0))
-    forecaster.fit(y_train)
-    fh = ForecastingHorizon(y_test.index, is_relative=False)
-    previsao = forecaster.predict(fh)
-    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_arima_forecast'])
-    return previsao_df
+    forecaster = ARIMA(order=order)
+    forecaster.fit(y)
+    # Retorna os valores ajustados (fitted values)
+    return pd.DataFrame(forecaster.fitted_values_, index=y.index, columns=[coluna])
 
-# Função para aplicar o modelo ExponentialSmoothing a uma coluna específica
-def aplicar_expsmoothing(df, coluna):
-    y = df[coluna]
-    y_train, y_test = temporal_train_test_split(y, test_size=24)
-    forecaster = ExponentialSmoothing(trend='add', seasonal='add', sp=12)
-    forecaster.fit(y_train)
-    fh = ForecastingHorizon(y_test.index, is_relative=False)
-    previsao = forecaster.predict(fh)
-    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_expsmoothing_forecast'])
-    return previsao_df
+# Função para aplicar o Exponential Smoothing a uma série temporal
+def aplicar_exp_smoothing(y):
+    forecaster = ExponentialSmoothing()
+    return pd.DataFrame(forecaster.fit(y).smooth(), index=y.index)
 
-# Aplicar os modelos ARIMA e ExponentialSmoothing às colunas de interesse
+# Aplicar o modelo ARIMA e Exponential Smoothing às colunas de interesse
 inicio_fusao = datetime.now()
-forecasts = []
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast_arima = aplicar_arima(df_resampled, coluna)
-    forecast_expsmoothing = aplicar_expsmoothing(df_resampled, coluna)
-    forecasts.append(forecast_arima)
-    forecasts.append(forecast_expsmoothing)
-
-# Concatenar previsões no DataFrame original
-df_forecast = pd.concat(forecasts, axis=1)
-
-# Adicionar previsões ao DataFrame original reamostrado
-df_resampled = df_resampled.join(df_forecast)
+    df_resampled[coluna + '_smoothed'] = aplicar_exp_smoothing(aplicar_arima(df_resampled, coluna, arima_order))
 
 fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
@@ -97,15 +88,20 @@ colecao_resultado.insert_many(df_resampled.reset_index().to_dict(orient='records
 fim_armazenamento = datetime.now()
 tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
-# Armazenar informações sobre a fusão no banco de dados "fusoes"
-info_fusao = {
-    "nome_fusao": "arima_expsmoothing_forecasting",
-    "tipo_fusao": "temporal",
+# Armazenar informações sobre a modelagem no banco de dados "fusoes"
+info_modelagem = {
+    "nome_modelagem_arima": "arima_sktime",
+    "nome_modelagem_exp_smoothing": "exp_smoothing",
+    "tipo_modelagem": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
-    "tempo_fusao_segundos": tempo_fusao.total_seconds(),
+    "tempo_modelagem_segundos": tempo_fusao.total_seconds(),
     "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
-    "data_hora": data_hora_atual  # Adicionando a data e hora atual
+    "data_hora": data_hora_atual,  # Adicionando a data e hora atual
+    "arima_order": arima_order,
+    "freq_resample": freq_resample,
+    "tipo_tratamento": tipo_tratamento,
+    "hostname": hostname 
 }
-colecao_fusoes.insert_one(info_fusao)
+colecao_fusoes.insert_one(info_modelagem)
 
-print("Fusão temporal ARIMA e ExponentialSmoothing concluída e resultados armazenados na coleção:", nome_colecao)
+print("Modelagem ARIMA seguido de Exponential Smoothing (sktime) concluída e resultados armazenados na coleção:", nome_colecao)

@@ -1,9 +1,22 @@
+import socket
 from pymongo import MongoClient
 from sktime.forecasting.arima import AutoARIMA
-from sktime.forecasting.model_selection import temporal_train_test_split
-from sktime.forecasting.base import ForecastingHorizon
 import pandas as pd
 from datetime import datetime
+
+# Definições dos parâmetros
+# seasonal_order (P, D, Q, s)
+# P: Número de termos sazonais autorregressivos (SAR)
+# D: Número de diferenças sazonais necessárias para tornar a série estacionária (SI)
+# Q: Número de termos sazonais de média móvel (SMA)
+# s: Período sazonal (por exemplo, 12 para dados mensais com sazonalidade anual)
+seasonal_order = (1, 1, 1, 12)
+
+freq_resample = 'H'
+tipo_tratamento = 'interpolacao'  # Pode ser 'interpolacao' ou 'dropna'
+
+# Obter o nome do computador
+hostname = socket.gethostname()
 
 # Conectando ao MongoDB
 client = MongoClient('localhost', 27017)
@@ -13,7 +26,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temp_autoarima_sktime_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temp_sarima_sktime_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -41,38 +54,31 @@ df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 # Transformar a coluna de timestamp para datetime
 df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 
-# Resample dos dados para uma frequência uniforme (exemplo: 1 hora)
-df_resampled = df_concatenado.set_index('timestamp').resample('H').mean()
+# Resample dos dados para uma frequência uniforme
+df_resampled = df_concatenado.set_index('timestamp').resample(freq_resample).mean()
 
-# Interpolar os valores ausentes para preencher a frequência
-df_resampled.interpolate(method='time', inplace=True)
+# Tratar valores ausentes com base no tipo de tratamento
+if tipo_tratamento == 'interpolacao':
+    # Interpolar os valores ausentes para preencher a frequência
+    df_resampled.interpolate(method='time', inplace=True)
+elif tipo_tratamento == 'dropna':
+    # Remover linhas que possuem valores ausentes
+    df_resampled.dropna(inplace=True)
+else:
+    raise ValueError("tipo_tratamento deve ser 'interpolacao' ou 'dropna'")
 
-# Remover linhas que ainda possuem valores ausentes após a interpolação
-df_resampled.dropna(inplace=True)
-
-# Função para aplicar o modelo AutoARIMA a uma coluna específica
-def aplicar_autoarima(df, coluna):
+# Função para aplicar o modelo SARIMA a uma coluna específica
+def aplicar_sarima(df, coluna, seasonal_order):
     y = df[coluna]
-    y_train, y_test = temporal_train_test_split(y, test_size=24)
-    forecaster = AutoARIMA(sp=12, suppress_warnings=True)
-    forecaster.fit(y_train)
-    fh = ForecastingHorizon(y_test.index, is_relative=False)
-    previsao = forecaster.predict(fh)
-    previsao_df = pd.DataFrame(previsao, columns=[f'{coluna}_autoarima_forecast'])
-    return previsao_df
+    forecaster = AutoARIMA(seasonal_order=seasonal_order, suppress_warnings=True)
+    forecaster.fit(y)
+    return forecaster
 
-# Aplicar o modelo AutoARIMA às colunas de interesse
+# Aplicar o modelo SARIMA às colunas de interesse
 inicio_fusao = datetime.now()
-forecasts = []
+sarima_models = {}
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast_autoarima = aplicar_autoarima(df_resampled, coluna)
-    forecasts.append(forecast_autoarima)
-
-# Concatenar previsões no DataFrame original
-df_forecast = pd.concat(forecasts, axis=1)
-
-# Adicionar previsões ao DataFrame original reamostrado
-df_resampled = df_resampled.join(df_forecast)
+    sarima_models[coluna] = aplicar_sarima(df_resampled, coluna, seasonal_order)
 
 fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
@@ -83,15 +89,19 @@ colecao_resultado.insert_many(df_resampled.reset_index().to_dict(orient='records
 fim_armazenamento = datetime.now()
 tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
-# Armazenar informações sobre a fusão no banco de dados "fusoes"
-info_fusao = {
-    "nome_fusao": "autoarima_forecasting",
-    "tipo_fusao": "temporal",
+# Armazenar informações sobre a modelagem no banco de dados "fusoes"
+info_modelagem = {
+    "nome_modelagem": "auto_arima",
+    "tipo_modelagem": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
-    "tempo_fusao_segundos": tempo_fusao.total_seconds(),
+    "tempo_modelagem_segundos": tempo_fusao.total_seconds(),
     "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
-    "data_hora": data_hora_atual  # Adicionando a data e hora atual
+    "data_hora": data_hora_atual,  # Adicionando a data e hora atual
+    "seasonal_order": seasonal_order,
+    "freq_resample": freq_resample,
+    "tipo_tratamento": tipo_tratamento,
+    "hostname": hostname  # Adicionando o nome do computador
 }
-colecao_fusoes.insert_one(info_fusao)
+colecao_fusoes.insert_one(info_modelagem)
 
-print("Fusão temporal AutoARIMA concluída e resultados armazenados na coleção:", nome_colecao)
+print("Modelagem AutoArima (sktime) concluída e resultados armazenados na coleção:", nome_colecao)

@@ -1,3 +1,4 @@
+import socket
 from pymongo import MongoClient
 from sktime.forecasting.arima import ARIMA
 import pandas as pd
@@ -8,6 +9,8 @@ arima_order = (5, 1, 0)
 freq_resample = 'H'
 tipo_tratamento = 'interpolacao'  # Pode ser 'interpolacao' ou 'dropna'
 
+# Obter o nome do computador
+hostname = socket.gethostname()
 # Conectando ao MongoDB
 client = MongoClient('localhost', 27017)
 db = client['dados']  # Banco de dados
@@ -51,9 +54,11 @@ df_resampled = df_concatenado.set_index('timestamp').resample(freq_resample).mea
 if tipo_tratamento == 'interpolacao':
     # Interpolar os valores ausentes para preencher a frequência
     df_resampled.interpolate(method='time', inplace=True)
-else:
+elif tipo_tratamento == 'dropna':
     # Remover linhas que possuem valores ausentes
     df_resampled.dropna(inplace=True)
+else:
+    raise ValueError("tipo_tratamento deve ser 'interpolacao' ou 'dropna'")
 
 # Função para aplicar o modelo ARIMA a uma coluna específica
 def aplicar_arima(df, coluna, order):
@@ -87,7 +92,8 @@ info_modelagem = {
     "data_hora": data_hora_atual,  # Adicionando a data e hora atual
     "arima_order": arima_order,
     "freq_resample": freq_resample,
-    "tipo_tratamento": tipo_tratamento
+    "tipo_tratamento": tipo_tratamento,
+    "hostname": hostname 
 }
 colecao_fusoes.insert_one(info_modelagem)
 
