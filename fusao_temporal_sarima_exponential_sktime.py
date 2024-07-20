@@ -1,18 +1,19 @@
+import socket
 from pymongo import MongoClient
-from sktime.forecasting.arima import AutoARIMA
+from sktime.forecasting.sarimax import SARIMAX
 from sktime.forecasting.exp_smoothing import ExponentialSmoothing
-from sktime.forecasting.model_selection import temporal_train_test_split
 from sktime.forecasting.base import ForecastingHorizon
 import pandas as pd
 from datetime import datetime
 
-# Area das variaveis
-trend = "add"
-resample = 'D'
-num_resampled = 1000
-seasonal = "add"
-sp = 12
+# Definições dos parâmetros
+sarima_order = (1, 1, 1)
+seasonal_order = (1, 1, 0, 12)  # Padrão sazonal
+freq_resample = 'H'
+interpolacao = True
 
+# Obter o nome do computador
+hostname = socket.gethostname()
 
 # Conectando ao MongoDB
 client = MongoClient('localhost', 27017)
@@ -22,9 +23,9 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_temp_sarima_exp_smoothing_sktime_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_temp_sarima_es_sktime_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
 
-# Coleção para armazenar os resultados
+# Coleções para armazenar os resultados
 colecao_resultado = db[nome_colecao]
 
 # Coleção para armazenar as informações sobre as fusões
@@ -50,69 +51,80 @@ df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 # Transformar a coluna de timestamp para datetime
 df_concatenado['timestamp'] = pd.to_datetime(df_concatenado['timestamp'])
 
-# Resample dos dados para uma frequência uniforme (exemplo: 1 dia)
-df_resampled = df_concatenado.set_index('timestamp').resample('D').mean()
+# Resample dos dados para uma frequência uniforme
+df_resampled = df_concatenado.set_index('timestamp').resample(freq_resample).mean()
 
-# Interpolar os valores ausentes para preencher a frequência
-df_resampled.interpolate(method='time', inplace=True)
+# Tratar valores ausentes com base no tipo de tratamento
+if interpolacao:
+    # Interpolar os valores ausentes para preencher a frequência
+    df_resampled.interpolate(method='time', inplace=True)
 
-# Remover linhas que ainda possuem valores ausentes após a interpolação
+# Sempre remover valores ausentes para garantir a integridade dos dados
 df_resampled.dropna(inplace=True)
 
-# Usar uma amostra menor dos dados (por exemplo, os últimos 1000 registros)
-df_resampled = df_resampled.iloc[-num_resampled:]
-
-# Função para aplicar o modelo SARIMA e ExponentialSmoothing a uma coluna específica
-def aplicar_sarima_e_expsmooth(df, coluna):
+# Função para aplicar o modelo SARIMA a uma coluna específica usando sktime
+def aplicar_sarima(df, coluna, order, seasonal_order):
     y = df[coluna]
-    y_train, y_test = temporal_train_test_split(y, test_size=24)
-    
-    # Aplicar SARIMA
-    forecaster_sarima = AutoARIMA(sp=12, seasonal=True, suppress_warnings=True)
-    forecaster_sarima.fit(y_train)
-    fh = ForecastingHorizon(y_test.index, is_relative=False)
-    previsao_sarima = forecaster_sarima.predict(fh)
-    previsao_sarima_df = pd.DataFrame(previsao_sarima, columns=[f'{coluna}_sarima_forecast'])
-    
-    # Aplicar ExponentialSmoothing
-    forecaster_expsmooth = ExponentialSmoothing(trend="add", seasonal="add", sp=12)
-    forecaster_expsmooth.fit(y_train)
-    previsao_expsmooth = forecaster_expsmooth.predict(fh)
-    previsao_expsmooth_df = pd.DataFrame(previsao_expsmooth, columns=[f'{coluna}_expsmooth_forecast'])
-    
-    return pd.concat([previsao_sarima_df, previsao_expsmooth_df], axis=1)
+    forecaster = SARIMAX(order=order, seasonal_order=seasonal_order)
+    forecaster.fit(y)
+    fh = ForecastingHorizon(y.index, is_relative=False)
+    return forecaster.predict(fh)
 
-# Aplicar os modelos às colunas de interesse
+# Função para aplicar o modelo de Suavização Exponencial a uma série temporal usando sktime
+def aplicar_exponential_smoothing(y):
+    forecaster = ExponentialSmoothing(trend='add', seasonal='add', sp=24)
+    forecaster.fit(y)
+    fh = ForecastingHorizon(y.index, is_relative=False)
+    return forecaster.predict(fh)
+
 inicio_fusao = datetime.now()
-forecasts = []
+
+# Aplicar o modelo SARIMA às colunas de interesse
+resultados_sarima = {}
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    forecast_sarima_expsmooth = aplicar_sarima_e_expsmooth(df_resampled, coluna)
-    forecasts.append(forecast_sarima_expsmooth)
+    previsoes = aplicar_sarima(df_resampled, coluna, sarima_order, seasonal_order)
+    resultados_sarima[coluna] = previsoes
 
-# Concatenar previsões no DataFrame original
-df_forecast = pd.concat(forecasts, axis=1)
+# Criar um DataFrame com as previsões ajustadas pelo SARIMA
+df_resultados_sarima = pd.DataFrame(resultados_sarima, index=df_resampled.index)
 
-# Adicionar previsões ao DataFrame original reamostrado
-df_resampled = df_resampled.join(df_forecast)
+# Remover linhas com valores NaN antes de aplicar Exponential Smoothing
+df_resultados_sarima.dropna(inplace=True)
+
+# Aplicar o modelo de Suavização Exponencial às previsões do SARIMA
+resultados_es = {}
+for coluna in df_resultados_sarima.columns:
+    previsoes_es = aplicar_exponential_smoothing(df_resultados_sarima[coluna])
+    resultados_es[coluna] = previsoes_es
+
+# Criar um DataFrame com as previsões ajustadas pelo Exponential Smoothing
+df_resultados_es = pd.DataFrame(resultados_es, index=df_resultados_sarima.index)
 
 fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
 
-# Armazenar os resultados na coleção correspondente no MongoDB
 inicio_armazenamento = datetime.now()
-colecao_resultado.insert_many(df_resampled.reset_index().to_dict(orient='records'))
+
+# Armazenar os resultados combinados na coleção correspondente no MongoDB
+colecao_resultado.insert_many(df_resultados_es.reset_index().to_dict(orient='records'))
+
 fim_armazenamento = datetime.now()
 tempo_armazenamento = fim_armazenamento - inicio_armazenamento
 
-# Armazenar informações sobre a fusão no banco de dados "fusoes"
-info_fusao = {
-    "nome_fusao": "sarima_expsmooth_forecasting",
-    "tipo_fusao": "temporal",
+# Armazenar informações sobre a modelagem no banco de dados "fusoes"
+info_modelagem = {
+    "nome_modelagem": "sarima_es_sktime",
+    "tipo_modelagem": "temporal",
     "quantidade_dados_utilizados": df_resampled.shape[0],
-    "tempo_fusao_segundos": tempo_fusao.total_seconds(),
-    "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
-    "data_hora": data_hora_atual  # Adicionando a data e hora atual
+    "tempo_modelagem_segundos": tempo_fusao.total_seconds(),  
+    "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),  
+    "data_hora": data_hora_atual,
+    "sarima_order": sarima_order,
+    "seasonal_order": seasonal_order,
+    "freq_resample": freq_resample,
+    "interpolacao": interpolacao,
+    "hostname": hostname
 }
-colecao_fusoes.insert_one(info_fusao)
+colecao_fusoes.insert_one(info_modelagem)
 
-print("Fusão temporal SARIMA e ExponentialSmoothing concluída e resultados armazenados na coleção:", nome_colecao)
+print("Previsões SARIMA com Exponential Smoothing ajustadas armazenadas na coleção:", nome_colecao)
