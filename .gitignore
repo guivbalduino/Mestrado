@@ -3,3 +3,4 @@
 \hivemq
 *.msi
 \__pycache__
+*.zip
