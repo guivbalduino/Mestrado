@@ -5,9 +5,14 @@ import pandas as pd
 from datetime import datetime
 
 # Definições dos parâmetros
-arima_order = (5, 1, 0)
-freq_resample = 'H'
+freq_resample = "D"
 interpolacao = True
+order = (5, 1, 0)
+exog = None
+dates = None
+freq = None
+missing = "none"
+
 
 # Obter o nome do computador
 hostname = socket.gethostname()
@@ -61,9 +66,9 @@ if interpolacao:
 df_resampled.dropna(inplace=True)
 
 # Função para aplicar o modelo ARIMA a uma coluna específica
-def aplicar_arima(df, coluna, order):
+def aplicar_arima(df, coluna):
     y = df[coluna]
-    model = ARIMA(y, order=order)
+    model = ARIMA(y, order=order, exog=exog, dates=dates, freq=freq, missing=missing)
     model_fit = model.fit()
     return model_fit.predict(start=y.index[0], end=y.index[-1])
 
@@ -71,7 +76,7 @@ inicio_fusao = datetime.now()
 # Aplicar o modelo ARIMA às colunas de interesse
 resultados_arima = {}
 for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
-    previsoes = aplicar_arima(df_resampled, coluna, arima_order)
+    previsoes = aplicar_arima(df_resampled, coluna)
     resultados_arima[coluna] = previsoes
 
 # Criar um DataFrame com as previsões ajustadas
@@ -94,10 +99,14 @@ info_modelagem = {
     "tempo_modelagem_segundos": tempo_fusao.total_seconds(),  
     "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),  
     "data_hora": data_hora_atual,
-    "arima_order": arima_order,
+    "arima_order": order,
     "freq_resample": freq_resample,
     "interpolacao": interpolacao,
-    "hostname": hostname
+    "hostname": hostname,
+    "exog": exog,
+    "dates": dates,
+    "freq": freq,
+    "missing": missing,
 }
 colecao_fusoes.insert_one(info_modelagem)
 

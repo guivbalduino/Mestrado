@@ -5,10 +5,28 @@ from sktime.forecasting.base import ForecastingHorizon
 import pandas as pd
 from datetime import datetime
 
-# Definições dos parâmetros
+# Definições dos parâmetros arima
 arima_order = (5, 1, 0)
-freq_resample = "H"
+freq_resample = "D"
 interpolacao = True
+seasonal_order=(0, 0, 0, 0)
+start_params=None
+method='lbfgs'
+maxiter=50
+suppress_warnings=False, 
+out_of_sample_size=0
+scoring='mse'
+scoring_args=None
+trend=None
+with_intercept=True
+time_varying_regression=False
+enforce_stationarity=True
+enforce_invertibility=True
+simple_differencing=False
+measurement_error=False
+mle_regression=True
+hamilton_representation=False
+concentrate_scale=False
 
 # Obter o nome do computador
 hostname = socket.gethostname()
@@ -67,10 +85,10 @@ df_resampled.dropna(inplace=True)
 
 
 # Função para aplicar o modelo ARIMA a uma coluna específica
-def aplicar_arima(df, coluna, order):
+def aplicar_arima(df, coluna):
     y = df[coluna]
     fh = ForecastingHorizon(y.index, is_relative=False)  # Horizonte de previsão
-    forecaster = ARIMA(order=order)
+    forecaster = ARIMA(order=arima_order, seasonal_order=seasonal_order, start_params=start_params, method=method, maxiter=maxiter, suppress_warnings=suppress_warnings, out_of_sample_size=out_of_sample_size, scoring=scoring, scoring_args=scoring_args, trend=trend, with_intercept=with_intercept, time_varying_regression=time_varying_regression, enforce_stationarity=enforce_stationarity, enforce_invertibility=enforce_invertibility, simple_differencing=simple_differencing, measurement_error=measurement_error, mle_regression=mle_regression, hamilton_representation=hamilton_representation, concentrate_scale=concentrate_scale)
     forecaster.fit(y)
     return forecaster.predict(fh)
 
@@ -80,7 +98,7 @@ inicio_fusao = datetime.now()
 # Aplicar o modelo ARIMA às colunas de interesse
 resultados_arima = {}
 for coluna in ["temperature_C", "humidity_percent", "pressure_hPa"]:
-    previsoes = aplicar_arima(df_resampled, coluna, arima_order)
+    previsoes = aplicar_arima(df_resampled, coluna)
     resultados_arima[coluna] = previsoes
 
 # Criar um DataFrame com as previsões ajustadas
@@ -109,6 +127,24 @@ info_modelagem = {
     "freq_resample": freq_resample,
     "interpolacao": interpolacao,
     "hostname": hostname,
+    "seasonal_order":seasonal_order,
+    "start_params":start_params,
+    "method":method,
+    "maxiter":maxiter,
+    "suppress_warnings":suppress_warnings, 
+    "out_of_sample_size":out_of_sample_size,
+    "scoring":scoring,
+    "scoring_args":scoring_args,
+    "trend":trend,
+    "with_intercept":with_intercept,
+    "time_varying_regression":time_varying_regression,
+    "enforce_stationarity":enforce_stationarity,
+    "enforce_invertibility":enforce_invertibility,
+    "simple_differencing":simple_differencing,
+    "measurement_error":measurement_error,
+    "mle_regression":mle_regression,
+    "hamilton_representation":hamilton_representation,
+    "concentrate_scale":concentrate_scale
 }
 colecao_fusoes.insert_one(info_modelagem)
 
