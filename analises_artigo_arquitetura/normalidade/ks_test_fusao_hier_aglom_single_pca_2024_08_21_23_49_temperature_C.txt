@@ -1,0 +1,3 @@
+Teste de Kolmogorov-Smirnov para temperature_C em fusao_hier_aglom_single_pca_2024-08-21_23-49:
+Estatística: 0.9999853953502728, P-valor: 0.0
+Distribuição não normal

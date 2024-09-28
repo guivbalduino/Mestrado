@@ -3,6 +3,7 @@ from sklearn.cluster import Birch
 from sklearn.decomposition import PCA
 import pandas as pd
 from datetime import datetime
+import joblib  # Importa o módulo joblib para salvar e carregar objetos
 
 # Parâmetros do algoritmo BIRCH
 branching_factor = 50
@@ -21,7 +22,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_hier_birch_pca_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_hier_birch_pca_" + data_hora_atual.strftime("%Y-%m-%d_%H-%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -43,23 +44,27 @@ dados_libelium = list(colecao_libelium.find({}, projecao))
 df_inmet = pd.DataFrame(dados_inmet)
 df_libelium = pd.DataFrame(dados_libelium)
 
+# Garantir que 'timestamp' está no formato datetime
+df_inmet['timestamp'] = pd.to_datetime(df_inmet['timestamp'], errors='coerce')
+df_libelium['timestamp'] = pd.to_datetime(df_libelium['timestamp'], errors='coerce')
+
 # Concatenar os DataFrames
 df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 
-# Excluir colunas não numéricas ou não relevantes para o clustering (.copy usado para)
-df_cluster = df_concatenado[['temperature_C', 'humidity_percent', 'pressure_hPa']].copy()
+# Excluir colunas não numéricas ou não relevantes para o clustering
+df_cluster = df_concatenado[['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa']].copy()
 
 # Remover linhas com valores ausentes
 df_cluster.dropna(inplace=True)
 
 # Redução de dimensionalidade usando PCA
 pca = PCA(n_components=n_components)
-df_pca = pca.fit_transform(df_cluster)
+df_pca = pca.fit_transform(df_cluster[['temperature_C', 'humidity_percent', 'pressure_hPa']])
 
 # Contar a quantidade de dados utilizados após a redução de dimensionalidade
 quantidade_dados_utilizados = len(df_pca)
 
-# Realizar o clustering hierárquico usando BIRCH nos dados reduzidos pelo PCA
+# Realizar o clustering BIRCH nos dados reduzidos pelo PCA
 inicio_fusao = datetime.now()
 brc = Birch(branching_factor=branching_factor, n_clusters=n_clusters, threshold=threshold, compute_labels=compute_labels)
 brc.fit(df_pca)
@@ -93,4 +98,9 @@ info_fusao = {
 }
 colecao_fusoes.insert_one(info_fusao)
 
+# Salvar o PCA no arquivo
+pca_path = f"E:/Git/Mestrado/src/pcas/pca_{nome_colecao[:-3]}.pkl"
+joblib.dump(pca, pca_path)
+
 print("Fusão hierárquica BIRCH com PCA concluída e resultados armazenados na coleção:", nome_colecao)
+print("Modelo PCA salvo em:", pca_path)

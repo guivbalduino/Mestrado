@@ -91,7 +91,7 @@ variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
 plot_types = ['line', 'bar']
 
 # Diretório de saída para os gráficos
-base_dir = r'E:\Git\Mestrado\comparativos'
+base_dir = r'E:\Git\Mestrado\comparativos\temporal'
 current_date_time_dir = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 output_dir = os.path.join(base_dir, current_date_time_dir)
 os.makedirs(output_dir, exist_ok=True)

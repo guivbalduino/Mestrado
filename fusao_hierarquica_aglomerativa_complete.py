@@ -3,6 +3,7 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.decomposition import PCA
 import pandas as pd
 from datetime import datetime
+import joblib  # Importa o módulo joblib para salvar e carregar objetos
 
 # Parâmetros do algoritmo Agglomerative Clustering
 n_clusters = 5  # Define o número de clusters
@@ -19,7 +20,7 @@ db = client['dados']  # Banco de dados
 data_hora_atual = datetime.now()
 
 # Crie o nome da coleção com base na data e hora atual
-nome_colecao = "fusao_hier_aglom_complete_pca_" + data_hora_atual.strftime("%Y-%m-%d_%H:%M")
+nome_colecao = "fusao_hier_aglom_complete_pca_" + data_hora_atual.strftime("%Y-%m-%d_%H-%M")
 
 # Coleção para armazenar os resultados
 colecao_resultado = db[nome_colecao]
@@ -44,8 +45,8 @@ df_libelium = pd.DataFrame(dados_libelium)
 # Concatenar os DataFrames
 df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 
-# Excluir colunas não numéricas ou não relevantes para o clustering (.copy usado para)
-df_cluster = df_concatenado[['temperature_C', 'humidity_percent', 'pressure_hPa']].copy()
+# Excluir colunas não numéricas ou não relevantes para o clustering (.copy usado para evitar SettingWithCopyWarning)
+df_cluster = df_concatenado[['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa']].copy()
 
 # Remover linhas com valores ausentes
 df_cluster.dropna(inplace=True)
@@ -55,7 +56,7 @@ quantidade_dados_utilizados = len(df_cluster)
 
 # Redução de dimensionalidade usando PCA
 pca = PCA(n_components=n_components)
-df_cluster_pca = pca.fit_transform(df_cluster)
+df_cluster_pca = pca.fit_transform(df_cluster[['temperature_C', 'humidity_percent', 'pressure_hPa']])
 
 # Realizar o clustering hierárquico usando Agglomerative Clustering
 inicio_fusao = datetime.now()
@@ -89,5 +90,9 @@ info_fusao = {
 }
 colecao_fusoes.insert_one(info_fusao)
 
-print("Fusão hierárquica aglomerativa complete com PCA concluída e resultados armazenados na coleção:", nome_colecao)
-#nao foi
+# Salvar o PCA no arquivo
+pca_path = f"E:/Git/Mestrado/src/pcas/pca_{nome_colecao[:-3]}.pkl"
+joblib.dump(pca, pca_path)
+
+print("Fusão hierárquica aglomerativa com PCA concluída e resultados armazenados na coleção:", nome_colecao)
+print("Modelo PCA salvo em:", pca_path)
