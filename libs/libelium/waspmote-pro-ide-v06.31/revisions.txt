@@ -1,0 +1,216 @@
+-- WASPMOTE PRO IDE v06.31 --
+
+                                                      )[            ....   
+                                                   -$wj[        _swmQQWC   
+                                                    -4Qm    ._wmQWWWW!'    
+                                                     -QWL_swmQQWBVY"~.____ 
+                                                     _dQQWTY+vsawwwgmmQWV! 
+                                    1isas,       _mgmQQQQQmmQWWQQWVY!"-    
+                                   .s,. -?ha     -9WDWU?9Qz~- -- -         
+                                   -""?Ya,."h,   <!`_mT!2-?5a,             
+                                   -Swa. Yg.-Q,  ~ ^`  /`   "$a.           
+ aac  <aa, aa/                aac  _a,-4c ]k +m               "1           
+.QWk  ]VV( QQf   .      .     QQk  )YT`-C.-? -Y  .                         
+.QWk       WQmymmgc  <wgmggc. QQk       wgz  = gygmgwagmmgc                
+.QWk  jQQ[ WQQQQQQW;jWQQ  QQL QQk  ]WQ[ dQk  ) QF~"WWW(~)QQ[               
+.QWk  jQQ[ QQQ  QQQ(mWQ9VVVVT QQk  ]WQ[ mQk  = Q;  jWW  :QQ[               
+ WWm,,jQQ[ QQQQQWQW']WWa,_aa. $Qm,,]WQ[ dQm,sj Q(  jQW  :QW[               
+ -TTT(]YT' TTTYUH?^  ~TTB8T!` -TYT[)YT( -?9WTT T'  ]TY  -TY(               
+                 
+                      www.libelium.com
+
+
+For more information, see the website at: http://www.libelium.com/
+or the forums at: http://www.libelium.com/forum/
+
+INSTALLATION
+Detailed instructions are in http://www.libelium.com/development/waspmote/documentation
+
+***********************************
+***         IDE v06.31      ***
+***********************************
+* Update Waspmote API to v056
+
+***********************************
+***         IDE v06.30      ***
+***********************************
+* Update Waspmote API to v055
+
+***********************************
+***         IDE v06.29      ***
+***********************************
+* Update Waspmote API to v054
+
+***********************************
+***         IDE v06.28      ***
+***********************************
+* Update Waspmote API to v053
+
+***********************************
+***         IDE v06.27      ***
+***********************************
+* Update Waspmote API to v052
+
+***********************************
+***         IDE v06.26      ***
+***********************************
+* Update Waspmote API to v051
+
+***********************************
+***         IDE v06.25      ***
+***********************************
+* Update Waspmote API to v050
+
+***********************************
+***         IDE v06.24      ***
+***********************************
+* Update Waspmote API to v049
+
+***********************************
+***         IDE v06.23      ***
+***********************************
+* Update Waspmote API to v048
+
+***********************************
+***         IDE v06.22      ***
+***********************************
+* Update Waspmote API to v047
+
+***********************************
+***         IDE v06.21      ***
+***********************************
+* Update Waspmote API to v046
+
+***********************************
+***         IDE v06.20      ***
+***********************************
+* Update Waspmote API to v045
+
+***********************************
+***         IDE v06.19      ***
+***********************************
+* Update Waspmote API to v044
+
+***********************************
+***         IDE v06.18      ***
+***********************************
+* Update MacOSx version due to crash on Catalina
+
+***********************************
+***         IDE v06.17      ***
+***********************************
+* Update Waspmote API to v043
+
+***********************************
+***         IDE v06.16      ***
+***********************************
+* Update Waspmote API to v042
+
+***********************************
+***         IDE v06.15      ***
+***********************************
+* Update Waspmote API to v041
+
+***********************************
+***         IDE v06.14      ***
+***********************************
+* Update Waspmote API to v040
+
+***********************************
+***         IDE v06.13      ***
+***********************************
+* Update Waspmote API to v039
+
+***********************************
+***         IDE v06.12      ***
+***********************************
+* Update Waspmote API to v038
+
+***********************************
+***         IDE v06.11      ***
+***********************************
+* Update Waspmote API to v037
+
+***********************************
+***         IDE v06.10      ***
+***********************************
+* Update Waspmote API to v036
+
+***********************************
+***         IDE v06.09      ***
+***********************************
+* Update Waspmote API to v035
+
+***********************************
+***         IDE v06.08      ***
+***********************************
+* Update Waspmote API to v034
+
+***********************************
+***         IDE v06.07      ***
+***********************************
+* Update Waspmote API to v033
+
+***********************************
+***         IDE v06.06      ***
+***********************************
+* Update Waspmote API to v032
+
+***********************************
+***         IDE v06.05      ***
+***********************************
+* Update Waspmote API to v031
+
+***********************************
+***         IDE v06.03      ***
+***********************************
+* Update Waspmote API to v029
+
+***********************************
+***         IDE v06.02      ***
+***********************************
+* Solve Bug saving files
+
+***********************************
+***         IDE v06      ***
+***********************************
+* Update Waspmote API to v028
+* Improved serial plotter with horizontal axis and grid
+* Solve bug save OTA files on Windows
+* Solve crash on OSX Sierra
+* Update to avrdude 6.3
+
+
+***********************************
+***         IDE v05             ***
+***********************************
+--> Released 25th November 2016
+--> New Waspmote API v025
+--> New toolchain for IDE:
+  > binutils-2.26
+  > gcc-4.9.2
+  > avr-libc-2.0.0
+  > gdb-7.8
+
+
+***********************************
+***         IDE v04             ***
+***********************************
+--> Released 12th December 2013
+--> New IDE only compiles with API v005 and so on.
+--> New toolchain for IDE:
+	> avr-gcc 4.7.2 compiler
+	> avr-libc 1.8.0
+
+
+***********************************
+***         IDE v03             ***
+***********************************
+--> New IDE IDE v02 released 8th April 2013. This new IDE only compiles API v003.
+APIv002 is not valid for this IDE.
+
+
+***********************************
+***  WASPMOTE PRO IDE 2.0.1     *** 
+***********************************
+--> This is the first released of the WASPMOTE PRO IDE

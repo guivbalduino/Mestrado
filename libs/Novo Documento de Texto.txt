@@ -1,0 +1,260 @@
+J#
+Starting Waspmote factory default program
+Waspmote serial ID: 22447C32C8913ED5
+RS485 in socket 0
+SD OK
+
+XBee module is plugged on socket 1:
+--> XBee type: 802.15.4
+--> MAC address: 0013A20040D8792A
+--> Firmware version: 10EF
+
+===============================
+ TEST: OK
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642330234143433A35343B2D35383B31303331234241543A393023
+frame (STR): <=>†#22447C32C8913ED5#node_id#0#ACC:54;-58;1031#BAT:90#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642331234143433A34353B2D36323B31303132234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#1#ACC:45;-62;1012#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642332234143433A33363B2D36353B31303137234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#2#ACC:36;-65;1017#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642333234143433A34353B2D36363B31303132234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#3#ACC:45;-66;1012#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642334234143433A34333B2D36383B31303132234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#4#ACC:43;-68;1012#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642335234143433A36323B2D37393B31303139234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#5#ACC:62;-79;1019#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642336234143433A34323B2D36373B31303136234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#6#ACC:42;-67;1016#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642337234143433A34313B2D35373B31303037234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#7#ACC:41;-57;1007#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642338234143433A35363B2D36323B31303132234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#8#ACC:56;-62;1012#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 56
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F69642339234143433A34383B2D37313B31303035234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#9#ACC:48;-71;1005#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 57
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F6964233130234143433A34383B2D36353B31303131234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#10#ACC:48;-65;1011#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 57
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F6964233131234143433A34353B2D35373B31303132234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#11#ACC:45;-57;1012#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 57
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F6964233132234143433A34313B2D36393B31303233234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#12#ACC:41;-69;1023#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 57
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F6964233133234143433A34343B2D36323B31303039234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#13#ACC:44;-62;1009#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 57
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F6964233134234143433A35353B2D36363B31303131234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#14#ACC:55;-66;1011#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 57
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F6964233135234143433A34363B2D36343B31303331234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#15#ACC:46;-64;1031#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 57
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F6964233136234143433A34373B2D36353B31303135234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#16#ACC:47;-65;1015#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+===============================
+Current ASCII Frame:
+Length: 57
+Frame Type:  134
+frame (HEX): 3C3D3E86022332323434374333324338393133454435236E6F64655F6964233137234143433A34383B2D36353B31303130234241543A393323
+frame (STR): <=>†#22447C32C8913ED5#node_id#17#ACC:48;-65;1010#BAT:93#
+===============================
+the frame above was sent
+enter deep sleep

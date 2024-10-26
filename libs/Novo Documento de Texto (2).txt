@@ -1,0 +1,51 @@
+J#
+************************************************
+ Smart Agriculture Xtreme - Quality control test
+************************************************
+Version: 1
+Serial number: 	00-AE-C3-C3
+Socket configuration:
+ _________
+|---------|
+| A  B  C |
+|_D__E__F_|
+
+SOCKET_A:   - 
+SOCKET_B:  SQ110
+SOCKET_C:   - 
+SOCKET_D:   - 
+SOCKET_E:   - 
+SOCKET_F:   - 
+---------------------------
+
+SOCKET_A:	EMPTY
+---------------------------
+SQ-110
+PA Radiation: 7492.72 umol*m-2*s-1
+---------------------------
+
+SOCKET_B:	<=>‡#267BBC32C8913ECA#PS_SAX#0#PAR_B:7492.72#
+SOCKET_C:	EMPTY
+SOCKET_D:	EMPTY
+SOCKET_E:	EMPTY
+SOCKET_F:	EMPTY
+sleep
+
+wake up
+---------------------
+RTC INT captured
+---------------------
+SOCKET_A:	EMPTY
+---------------------------
+SQ-110
+PA Radiation: 7492.75 umol*m-2*s-1
+---------------------------
+
+SOCKET_B:	<=>‡#267BBC32C8913ECA#PS_SAX#1#PAR_B:7492.75#
+SOCKET_C:	EMPTY
+SOCKET_D:	EMPTY
+SOCKET_E:	EMPTY
+SOCKET_F:	EMPTY
+sleep
+
+wake up
