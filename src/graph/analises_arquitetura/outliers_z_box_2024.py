@@ -13,7 +13,7 @@ hostname = socket.gethostname()
 client = MongoClient("localhost", 27017)
 db = client["dados"]  # Banco de dados
 
-def load_data_from_mongo(collection_name, filter_date=None):
+def load_data_from_mongo(collection_name, filter_date="2024-01-01"):
     client = MongoClient("localhost", 27017)
     db = client["dados"]
     collection = db[collection_name]
@@ -79,7 +79,7 @@ fusao_collections = get_fusao_collections()
 print(f"Coleções encontradas: {fusao_collections}")
 
 # Carregando os dados das coleções de fusao_temp_, inmet e libelium
-fusao_data = {col: load_data_from_mongo(col) for col in fusao_collections}
+fusao_data = {col: load_data_from_mongo(col,) for col in fusao_collections}
 inmet_data = load_data_from_mongo('inmet')
 libelium_data = load_data_from_mongo('libelium')
 
@@ -87,7 +87,7 @@ libelium_data = load_data_from_mongo('libelium')
 variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
 
 # Diretórios de saída para os gráficos
-base_dir = r'E:\Git\Mestrado\analises_artigo_arquitetura\parcial_2024'
+base_dir = r'.\analises_artigo_arquitetura\parcial_2024'
 current_date_time_dir = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
 # Criação de subpastas

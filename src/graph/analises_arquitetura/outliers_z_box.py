@@ -75,7 +75,7 @@ libelium_data = load_data_from_mongo('libelium')
 variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
 
 # Diretórios de saída para os gráficos
-base_dir = r'E:\Git\Mestrado\analises_artigo_arquitetura'
+base_dir = r'.\analises_artigo_arquitetura'
 current_date_time_dir = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
 # Criação de subpastas

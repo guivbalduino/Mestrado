@@ -56,7 +56,7 @@ def plot_ks_test(data, variable, label, output_dir):
     print(f"Gráfico do Teste de Kolmogorov-Smirnov salvo como: {file_path}")
 
 # Diretório para salvar os resultados
-output_dir = r'E:\Git\Mestrado\analises_artigo_arquitetura\normalidade'
+output_dir = r'.\analises_artigo_arquitetura\normalidade'
 os.makedirs(output_dir, exist_ok=True)
 
 # Carregar coleções fusionadas

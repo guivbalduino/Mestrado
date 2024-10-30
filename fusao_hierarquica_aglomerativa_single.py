@@ -104,7 +104,7 @@ info_fusao = {
 colecao_fusoes.insert_one(info_fusao)
 
 # Salvar o PCA no arquivo
-pca_path = f"E:/Git/Mestrado/src/pcas/pca_{nome_colecao[:-3]}.pkl"
+pca_path = f"./src/pcas/pca_{nome_colecao[:-3]}.pkl"
 joblib.dump(pca, pca_path)
 
 print("Fusão hierárquica aglomerativa single com PCA concluída e resultados armazenados na coleção:", nome_colecao)

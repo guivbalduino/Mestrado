@@ -5,24 +5,32 @@ from pymongo import MongoClient
 import socket
 from datetime import datetime
 
-# Obter o nome do computador (hostname)
-hostname = socket.gethostname()
-
-# Conectando ao MongoDB
-client = MongoClient("localhost", 27017)
-db = client["dados"]  # Banco de dados
-
-# Função para carregar dados de uma coleção MongoDB
-def load_data_from_mongo(collection_name, filter={}):
+# Função para carregar dados de uma coleção MongoDB com filtro e tratamento do timestamp
+def load_data_from_mongo(collection_name, filter_date=None):
+    client = MongoClient("localhost", 27017)
+    db = client["dados"]
     collection = db[collection_name]
-    data = pd.DataFrame(list(collection.find(filter)))
-    if data.empty:
-        print(f"Sem dados na coleção: {collection_name}")
-    data['timestamp'] = pd.to_datetime(data['timestamp'])
+    data = pd.DataFrame(list(collection.find()))
+    
+    # Verificar se a coluna 'timestamp' está em string ou datetime
+    if 'timestamp' in data.columns:
+        if data['timestamp'].dtype == 'object':  # Se for string
+            data['timestamp'] = pd.to_datetime(data['timestamp'], format='%Y-%m-%d %H:%M:%S')
+        elif data['timestamp'].dtype == 'datetime64[ns]':  # Se já for datetime
+            pass
+        else:
+            raise ValueError("Formato da coluna 'timestamp' não reconhecido.")
+    
+    # Filtrar por data se necessário
+    if filter_date:
+        data = data[data['timestamp'] >= filter_date]
+    
     return data
 
 # Função para encontrar todas as coleções que começam com "fusao_temp_"
 def get_fusao_collections():
+    client = MongoClient("localhost", 27017)
+    db = client["dados"]
     return [col for col in db.list_collection_names() if col.startswith('fusao_temp_')]
 
 # Função para garantir que o nome do arquivo seja válido
@@ -75,10 +83,13 @@ fusao_collections = get_fusao_collections()
 # Verificando as coleções encontradas
 print(f"Coleções encontradas: {fusao_collections}")
 
-# Carregando os dados das coleções de fusao_temp_, inmet e libelium
-fusao_data = {col: load_data_from_mongo(col) for col in fusao_collections}
-inmet_data = load_data_from_mongo('inmet')
-libelium_data = load_data_from_mongo('libelium')
+# Definindo a data a partir da qual os dados serão filtrados
+start_date = pd.to_datetime('2006-02-01')
+
+# Carregando os dados das coleções de fusao_temp_, inmet e libelium com filtro
+fusao_data = {col: load_data_from_mongo(col, start_date) for col in fusao_collections}
+inmet_data = load_data_from_mongo('inmet', start_date)
+libelium_data = load_data_from_mongo('libelium', start_date)
 
 # Verificando os dados carregados
 print(f"Dados inmet carregados: {not inmet_data.empty}")
