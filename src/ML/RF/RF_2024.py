@@ -51,6 +51,7 @@ def extract_time_features(data):
 
 # Função para treinar e prever com Random Forest
 def train_and_predict(collection_name,hoje):
+    inicio_modelagem = datetime.now()
     # Carregar dados
     data = load_data_from_mongo(collection_name)
 
@@ -92,6 +93,10 @@ def train_and_predict(collection_name,hoje):
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
 
+    fim_modelagem = datetime.now()
+    tempo_modelagem = fim_modelagem - inicio_modelagem
+
+    inicio_armazenamento = datetime.now()
     # Diretório para salvar previsões e modelo
     base_dir = f"./previsoes/2024/{sanitize_directory_name(hoje)}/{sanitize_directory_name(collection_name)}"
     os.makedirs(base_dir, exist_ok=True)
@@ -100,6 +105,32 @@ def train_and_predict(collection_name,hoje):
     model_path = os.path.join(base_dir, f"{sanitize_directory_name(collection_name)}_rf_model.joblib")
     joblib.dump(rf_model, model_path)
     print(f"Modelo salvo em: {model_path}")
+    fim_armazenamento = datetime.now()
+    tempo_armazenamento = fim_armazenamento - inicio_armazenamento
+
+    # Salvar informações do modelo e avaliação no MongoDB
+    model_params = {
+        "n_estimators": 100,
+        "max_depth": 10,
+        "min_samples_leaf": 2,
+        "min_samples_split": 5,
+        "criterion": 'squared_error',
+        "random_state": 42,
+        "bootstrap": True,
+        "y_train": y_train.shape[0]
+    }
+    eval_metrics = {
+        "mae": mae,
+        "mse": mse,
+        "r2": r2
+    }
+    # Antes de chamar a função save_model_info
+    quantidade_dados_utilizados = len(y_train)  # Ajuste se necessário para refletir a variável correta
+
+    # E passe quantidade_dados_utilizados para save_model_info
+    save_model_info(collection_name, model_params, eval_metrics, tempo_modelagem, tempo_armazenamento, hoje, quantidade_dados_utilizados,model_path)
+
+    print(f"Modelo e informações armazenados para a coleção: {collection_name}")
 
     # Ajustar a correspondência entre as previsões e as datas
     X_test_dates = data.loc[X_test.index, 'timestamp']  # Obter as datas reais de X_test
@@ -162,6 +193,38 @@ def train_and_predict(collection_name,hoje):
     plt.close()
 
     print(f"Gráficos de previsão, avaliação, resíduos e todos os dados salvos em: {base_dir}")
+
+# Função para armazenar informações do modelo no MongoDB
+def save_model_info(collection_name, model_params, eval_metrics, tempo_modelagem, tempo_armazenamento, hoje, quantidade_dados_utilizados,model_path):
+    client = MongoClient("localhost", 27017)
+    db = client["dados"]
+    colecao_fusoes = db["resultados_modelagem"]
+
+    # Dados para armazenar no MongoDB
+    info_modelagem = {
+        "nome_modelagem": "random_forest_regressor",
+        "tipo_modelagem": "previsao_temperatura",
+        "quantidade_dados_utilizados": quantidade_dados_utilizados,  # Usa o novo parâmetro
+        "tempo_modelagem_segundos": tempo_modelagem.total_seconds(),
+        "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
+        "data_hora": hoje,
+        "collection": collection_name,
+        "local_modelo":model_path,
+        # parâmetros do modelo
+        "n_estimators": model_params["n_estimators"],
+        "max_depth": model_params["max_depth"],
+        "min_samples_leaf": model_params["min_samples_leaf"],
+        "min_samples_split": model_params["min_samples_split"],
+        "criterion": model_params["criterion"],
+        "random_state": model_params["random_state"],
+        "bootstrap": model_params["bootstrap"],
+        # Métricas de avaliação
+        "mean_absolute_error": eval_metrics["mae"],
+        "mean_squared_error": eval_metrics["mse"],
+        "r2_score": eval_metrics["r2"],
+    }
+    colecao_fusoes.insert_one(info_modelagem)
+    print("Informações de avaliação e parâmetros armazenadas no MongoDB com sucesso.")
 
 
 
