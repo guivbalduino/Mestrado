@@ -98,7 +98,7 @@ def train_and_predict(collection_name,hoje):
 
     inicio_armazenamento = datetime.now()
     # Diretório para salvar previsões e modelo
-    base_dir = f"./previsoes/2024/{sanitize_directory_name(hoje)}/{sanitize_directory_name(collection_name)}"
+    base_dir = f"./previsoes/2024/RF/{sanitize_directory_name(hoje)}/{sanitize_directory_name(collection_name)}"
     os.makedirs(base_dir, exist_ok=True)
 
     # Salvar modelo
@@ -151,11 +151,14 @@ def train_and_predict(collection_name,hoje):
     plt.savefig(os.path.join(base_dir, "previsao_temperatura.png"), dpi=300)
     plt.close()
 
-    # Gráfico de avaliação - MAE, MSE, R2
     plt.figure(figsize=(8, 6))
     metrics = ['MAE', 'MSE', 'R2']
     values = [mae, mse, r2]
     plt.bar(metrics, values, color=['blue', 'orange', 'green'])
+
+    # Adicionar valores acima das barras
+    [plt.text(i, v, f"{v:.2f}", ha='center', va='bottom') for i, v in enumerate(values)]
+
     plt.title(f"Avaliação do Modelo - {collection_name}")
     plt.ylabel("Valor")
     plt.tight_layout()
@@ -233,4 +236,4 @@ hoje = datetime.now().strftime("%Y-%m-%d_%H-%M")
 collections = get_fusao_collections()
 for collection in collections:
     train_and_predict(collection,hoje)
-    break  # Remover este break quando quiser processar todas as coleções
+    #break  # Remover este break quando quiser processar todas as coleções
