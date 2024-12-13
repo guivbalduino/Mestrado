@@ -29,7 +29,8 @@ colecao_inmet = db['inmet']
 colecao_libelium = db['libelium']
 
 # Projetar e recuperar apenas as colunas necessárias para cada coleção
-projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1}
+projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1,
+    "PRECIPITAÇÃO TOTAL, HORÁRIO (mm)": 1}
 
 dados_inmet = list(colecao_inmet.find({}, projecao))
 dados_libelium = list(colecao_libelium.find({}, projecao))

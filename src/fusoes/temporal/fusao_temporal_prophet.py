@@ -31,7 +31,8 @@ colecao_inmet = db['inmet']
 colecao_libelium = db['libelium']
 
 # Projetar e recuperar apenas as colunas necessárias para cada coleção
-projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1}
+projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1,
+    "PRECIPITAÇÃO TOTAL, HORÁRIO (mm)": 1}
 
 dados_inmet = list(colecao_inmet.find({}, projecao))
 dados_libelium = list(colecao_libelium.find({}, projecao))
@@ -64,7 +65,7 @@ def aplicar_prophet(df, coluna):
 # Aplicar o modelo Prophet às colunas de interesse
 inicio_fusao = datetime.now()
 forecasts = []
-for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa']:
+for coluna in ['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]:
     forecast = aplicar_prophet(df_resampled.reset_index(), coluna)
     forecasts.append(forecast.set_index('timestamp'))
 

@@ -36,7 +36,8 @@ colecao_inmet = db['inmet']
 colecao_libelium = db['libelium']
 
 # Projetar e recuperar apenas as colunas necessárias para cada coleção
-projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1}
+projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1,
+    "PRECIPITAÇÃO TOTAL, HORÁRIO (mm)": 1}
 
 dados_inmet = list(colecao_inmet.find({}, projecao))
 dados_libelium = list(colecao_libelium.find({}, projecao))
@@ -53,7 +54,7 @@ df_libelium['timestamp'] = pd.to_datetime(df_libelium['timestamp'], errors='coer
 df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 
 # Excluir colunas não numéricas ou não relevantes para o clustering (.copy usado para evitar SettingWithCopyWarning)
-df_cluster = df_concatenado[['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa']].copy()
+df_cluster = df_concatenado[['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]].copy()
 
 # Remover linhas com valores ausentes
 df_cluster.dropna(inplace=True)

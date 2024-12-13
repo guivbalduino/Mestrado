@@ -33,7 +33,8 @@ colecao_inmet = db['inmet']
 colecao_libelium = db['libelium']
 
 # Projetar e recuperar apenas as colunas necessárias para cada coleção
-projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1}
+projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1,
+    "PRECIPITAÇÃO TOTAL, HORÁRIO (mm)": 1}
 
 dados_inmet = list(colecao_inmet.find({}, projecao))
 dados_libelium = list(colecao_libelium.find({}, projecao))
@@ -50,14 +51,14 @@ df_libelium['timestamp'] = pd.to_datetime(df_libelium['timestamp'], errors='coer
 df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 
 # Excluir colunas não numéricas ou não relevantes para o clustering
-df_cluster = df_concatenado[['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa']].copy()
+df_cluster = df_concatenado[['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]].copy()
 
 # Remover linhas com valores ausentes
 df_cluster.dropna(inplace=True)
 
 # Redução de dimensionalidade usando PCA
 pca = PCA(n_components=n_components)
-df_pca = pca.fit_transform(df_cluster[['temperature_C', 'humidity_percent', 'pressure_hPa']])
+df_pca = pca.fit_transform(df_cluster[['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]])
 
 # Contar a quantidade de dados utilizados após a redução de dimensionalidade
 quantidade_dados_utilizados = len(df_pca)
@@ -70,6 +71,7 @@ fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
 
 # Adicionar rótulos de cluster ao DataFrame original
+df_concatenado = df_concatenado.iloc[df_cluster.index]  # Filtrar o DataFrame para manter apenas as linhas utilizadas no clustering
 df_concatenado['cluster_label'] = hdb.labels_
 
 # Armazenar os resultados na coleção correspondente no MongoDB

@@ -58,6 +58,7 @@ projecao = {
     "temperature_C": 1,
     "humidity_percent": 1,
     "pressure_hPa": 1,
+    "PRECIPITAÇÃO TOTAL, HORÁRIO (mm)": 1
 }
 
 dados_inmet = list(colecao_inmet.find({}, projecao))
@@ -110,15 +111,17 @@ def aplicar_sarima(df, coluna):
         validate_specification=validate_specification,
     )
     model_fit = model.fit(disp=False)
-    return model_fit.predict(start=y.index[0], end=y.index[-1])
+    return model_fit.predict(start=y.index[0], end=y.index[-1]), model_fit.aic
 
 
 inicio_fusao = datetime.now()
 # Aplicar o modelo SARIMA às colunas de interesse
+aic_values = {}  # Dicionário para armazenar os AICs de cada coluna
 resultados_sarima = {}
-for coluna in ["temperature_C", "humidity_percent", "pressure_hPa"]:
-    previsoes = aplicar_sarima(df_resampled, coluna)
+for coluna in ["temperature_C", "humidity_percent", "pressure_hPa","PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]:
+    previsoes, aic_values[coluna] = aplicar_sarima(df_resampled, coluna)
     resultados_sarima[coluna] = previsoes
+    print(coluna)
 
 # Criar um DataFrame com as previsões ajustadas
 df_resultados = pd.DataFrame(resultados_sarima, index=df_resampled.index)
@@ -162,6 +165,7 @@ info_modelagem = {
     "freq": freq,
     "missing": missing,
     "validate_specification": validate_specification,
+    "aic_values": aic_values  # Agora armazenamos os AICs das colunas
 }
 colecao_fusoes.insert_one(info_modelagem)
 

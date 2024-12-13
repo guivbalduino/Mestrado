@@ -36,7 +36,8 @@ colecao_inmet = db['inmet']
 colecao_libelium = db['libelium']
 
 # Projetar e recuperar apenas as colunas necessárias para cada coleção
-projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1}
+projecao = {"timestamp": 1, "temperature_C": 1, "humidity_percent": 1, "pressure_hPa": 1,
+    "PRECIPITAÇÃO TOTAL, HORÁRIO (mm)": 1}
 
 dados_inmet = list(colecao_inmet.find({}, projecao))
 dados_libelium = list(colecao_libelium.find({}, projecao))
@@ -53,30 +54,33 @@ df_libelium['timestamp'] = pd.to_datetime(df_libelium['timestamp'], errors='coer
 df_concatenado = pd.concat([df_inmet, df_libelium], ignore_index=True)
 
 # Excluir colunas não numéricas ou não relevantes para o clustering (.copy usado para evitar SettingWithCopyWarning)
-df_cluster = df_concatenado[['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa']].copy()
+df_cluster = df_concatenado[['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]].copy()
 
 # Remover linhas com valores ausentes
 df_cluster.dropna(inplace=True)
 
+# Armazenar a coluna 'timestamp' para reinserir após o PCA
+timestamps = df_cluster['timestamp'].copy()
+
+# Excluir a coluna 'timestamp' antes de aplicar o PCA
+df_cluster.drop(columns=['timestamp'], inplace=True)
+
 # Contar a quantidade de dados utilizados
 quantidade_dados_utilizados = len(df_cluster)
 
-# Inicializar PCA e ajustá-lo com todos os dados
-pca = PCA(n_components=n_components)
-df_cluster_pca = pca.fit_transform(df_cluster[['temperature_C', 'humidity_percent', 'pressure_hPa']])
-
 # Inicializar listas para armazenar resultados
-all_cluster_labels = []
 df_clusters = []
 
 inicio_fusao = datetime.now()
+
 # Processamento em lotes
 for start in range(0, quantidade_dados_utilizados, batch_size):
     end = min(start + batch_size, quantidade_dados_utilizados)
     batch_data = df_cluster.iloc[start:end].copy()
     
-    # Reduzir dimensionalidade usando o PCA ajustado anteriormente
-    batch_data_pca = pca.transform(batch_data[['temperature_C', 'humidity_percent', 'pressure_hPa']])
+    # Redução de dimensionalidade usando PCA
+    pca = PCA(n_components=n_components)
+    batch_data_pca = pca.fit_transform(batch_data)
     
     # Realizar o clustering hierárquico usando Agglomerative Clustering
     agglomerative_clusterer = AgglomerativeClustering(n_clusters=n_clusters, linkage=linkage)
@@ -88,6 +92,10 @@ for start in range(0, quantidade_dados_utilizados, batch_size):
 
 # Concatenar todos os lotes processados em um único DataFrame
 df_cluster_final = pd.concat(df_clusters, ignore_index=True)
+
+# Reintroduzir a coluna 'timestamp' no DataFrame final
+df_cluster_final['timestamp'] = timestamps.reset_index(drop=True)
+
 fim_fusao = datetime.now()
 tempo_fusao = fim_fusao - inicio_fusao
 

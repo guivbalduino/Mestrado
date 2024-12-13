@@ -82,6 +82,7 @@ projecao = {
     "temperature_C": 1,
     "humidity_percent": 1,
     "pressure_hPa": 1,
+    "PRECIPITAÇÃO TOTAL, HORÁRIO (mm)": 1
 }
 
 dados_inmet = list(colecao_inmet.find({}, projecao))
@@ -171,7 +172,7 @@ inicio_fusao = datetime.now()
 
 # Aplicar o modelo ARIMA às colunas de interesse
 resultados_arima = {}
-for coluna in ["temperature_C", "humidity_percent", "pressure_hPa"]:
+for coluna in ["temperature_C", "humidity_percent", "pressure_hPa","PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]:
     previsoes = aplicar_arima(df_resampled, coluna)
     resultados_arima[coluna] = previsoes
 

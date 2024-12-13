@@ -96,6 +96,7 @@ projecao = {
     "temperature_C": 1,
     "humidity_percent": 1,
     "pressure_hPa": 1,
+    "PRECIPITAÇÃO TOTAL, HORÁRIO (mm)":1
 }
 
 dados_inmet = list(colecao_inmet.find({}, projecao))
@@ -199,7 +200,7 @@ inicio_fusao = datetime.now()
 
 # Aplicar o modelo SARIMA às colunas de interesse
 resultados_sarima = {}
-for coluna in ["temperature_C", "humidity_percent", "pressure_hPa"]:
+for coluna in ["temperature_C", "humidity_percent", "pressure_hPa","PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]:
     previsoes = aplicar_sarima(df_resampled, coluna)
     resultados_sarima[coluna] = previsoes
 
