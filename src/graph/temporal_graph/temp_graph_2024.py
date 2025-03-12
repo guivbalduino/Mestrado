@@ -96,7 +96,7 @@ print(f"Dados inmet carregados: {not inmet_data.empty}")
 print(f"Dados libelium carregados: {not libelium_data.empty}")
 
 # Variáveis para o eixo y
-variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
+variables = ['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
 
 # Tipo de gráfico ('line' ou 'bar')
 plot_types = ['line', 'bar']

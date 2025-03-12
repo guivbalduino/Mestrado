@@ -77,7 +77,7 @@ fusao_collections = [col for col in db.list_collection_names() if col.startswith
 fusao_data = {col: load_data_from_mongo(col) for col in fusao_collections}
 
 # Variáveis para a análise de normalidade
-variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
+variables = ['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
 
 # Realizando o Teste de Kolmogorov-Smirnov para cada coleção e plotando os gráficos
 for fusao_label, fusao_df in fusao_data.items():

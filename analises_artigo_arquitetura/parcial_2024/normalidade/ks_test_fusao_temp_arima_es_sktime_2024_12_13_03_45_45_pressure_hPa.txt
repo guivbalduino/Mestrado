@@ -1,0 +1,3 @@
+Teste de Kolmogorov-Smirnov para pressure_hPa em fusao_temp_arima_es_sktime_2024-12-13_03:45-45:
+Estatística: 0.4022925817069174, P-valor: 1.8508905689083613e-36
+Distribuição não normal

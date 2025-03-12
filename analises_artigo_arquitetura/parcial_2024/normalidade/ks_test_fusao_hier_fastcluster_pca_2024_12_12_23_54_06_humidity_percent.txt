@@ -1,0 +1,3 @@
+Teste de Kolmogorov-Smirnov para humidity_percent em fusao_hier_fastcluster_pca_2024-12-12_23-54-06:
+Estatística: 1.0, P-valor: 0.0
+Distribuição não normal

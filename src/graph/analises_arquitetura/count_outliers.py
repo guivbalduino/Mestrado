@@ -9,7 +9,7 @@ outliers_dirs = [
 ]
 
 # Variáveis que estamos analisando
-variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
+variables = ['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
 
 # Função para garantir que o nome do arquivo seja válido
 def sanitize_filename(filename):

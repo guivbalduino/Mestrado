@@ -76,10 +76,10 @@ def train_and_predict_rf(           collection_name,
     data = extract_time_features(data)
 
     # Definir variável alvo (temperatura) e características
-    y = data['temperature_C']
+    y = data["PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
     
     # Selecionando variáveis para X (humidade, pressão, cluster_label se disponível, e componentes temporais)
-    X = data[['humidity_percent', 'pressure_hPa', 'year', 'month', 'day', 'hour', 'minute']]  # Variáveis para previsão
+    X = data[['temperature_C','humidity_percent', 'pressure_hPa', 'year', 'month', 'day', 'hour', 'minute']]  # Variáveis para previsão
     
     if 'cluster_label' in data.columns:
         X['cluster_label'] = data['cluster_label']  # Adicionando cluster_label, se existir
@@ -126,9 +126,9 @@ if __name__ == "__main__":
 
     # Valores para os hiperparâmetros
     n_estimators_values = [50, 100, 150]
-    max_depth_values = [5, 10]
-    min_samples_leaf_values = [2, 4]
-    min_samples_split_values = [2,10]
+    max_depth_values = [5, 10, 20]
+    min_samples_leaf_values = [2, 4, 6]
+    min_samples_split_values = [2, 5,10]
     criterion_values = ['squared_error']
     bootstrap_values = [True, False]  # Inclua se quiser variar também o bootstrap
     random_state = 42

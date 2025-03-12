@@ -83,13 +83,13 @@ inmet_data = load_data_from_mongo('inmet')
 libelium_data = load_data_from_mongo('libelium')
 
 # Filtrar as colunas necessárias
-columns_to_keep = ['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa']
+columns_to_keep = ['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
 inmet_data = inmet_data[columns_to_keep]
-libelium_data = libelium_data[columns_to_keep]
+libelium_data = libelium_data[columns_to_keep[:-1]]
 
 # Variáveis para a análise de outliers
-variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
-
+variables = ['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
+print(variables)
 # Analisando outliers para inmet
 for variable in variables:
     try:
@@ -118,7 +118,7 @@ for variable in variables:
         print(f"Erro ao analisar outliers para inmet - {variable}: {e}")
 
 # Analisando outliers para libelium
-for variable in variables:
+for variable in variables[:-1]:
     try:
         # Gerar boxplot para visualizar os outliers
         plot_boxplot(libelium_data, variable, 'libelium', boxplot_dir_libelium)

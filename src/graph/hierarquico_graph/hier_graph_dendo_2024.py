@@ -78,7 +78,7 @@ for nome_colecao in colecoes:
     pca = joblib.load(pca_path)
     
     # Aplicar PCA aos dados para a visualização
-    df_features = df[['temperature_C', 'humidity_percent', 'pressure_hPa']]
+    df_features = df[['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]]
     df_pca = pca.transform(df_features)
     
     # Usar uma amostra dos dados se o volume for muito grande

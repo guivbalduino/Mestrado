@@ -1,0 +1,642 @@
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-29-47.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-29-47.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-29-47.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-30-20.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-30-20.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-30-20.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-41-15.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-41-15.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-41-15.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-41-47.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-41-47.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-41-47.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-42-23.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-42-23.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-42-23.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-48-14.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-48-14.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_average_pca_minibatch_2024-12-12_22-48-14.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-31-34.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-31-34.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-31-34.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-32-39.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-32-39.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-32-39.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-37-47.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-37-47.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-37-47.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-33-25.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-33-25.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-33-25.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-39-06.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-39-06.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-39-06.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-45-05.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-45-05.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-45-05.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-30.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-30.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-30.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-41.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-41.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-41.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-51.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-51.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-51.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-24-31.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-24-31.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-24-31.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-33-47.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-33-47.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-33-47.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-34-20.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-34-20.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-34-20.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-34-56.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-34-56.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-34-56.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-39-28.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-39-28.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-39-28.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-40-38.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-40-38.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-40-38.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-45-17.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-45-17.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-45-17.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-45-49.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-45-49.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-45-49.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-46-27.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-46-27.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_aglom_ward_pca_minibatch_2024-12-12_22-46-27.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-19-53.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-19-53.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-19-53.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-20-06.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-20-06.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-20-06.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-21-58.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-21-58.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-21-58.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-26-03.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-26-03.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-26-03.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-26-10.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-26-10.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-26-10.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-26-57.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-26-57.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-26-57.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-28-28.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-28-28.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-28-28.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-28-35.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-28-35.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-28-35.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-29-09.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-29-09.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-29-09.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-29-23.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_birch_pca_2024-12-13_00-29-23.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_birch_pca_2024-12-13_00-29-23.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-55-30.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-55-30.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-55-30.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-55-42.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-55-42.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-55-42.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-55-55.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-55-55.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-55-55.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-56-40.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-56-40.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-56-40.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-59-39.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-59-39.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_fastcluster_pca_2024-12-12_23-59-39.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-00-06.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-00-06.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-00-06.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-02-08.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-02-08.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-02-08.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-02-34.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-02-34.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-02-34.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-04-43.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-04-43.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-04-43.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-05-33.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-05-33.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_fastcluster_pca_2024-12-13_00-05-33.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-07-42.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-07-42.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-07-42.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-09-20.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-09-20.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-09-20.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-09-38.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-09-38.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-09-38.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-10-35.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-10-35.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-10-35.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-10-44.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-10-44.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_hdbscan_pca_2024-12-13_00-10-44.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_kmeans_pca_2024-12-13_00-11-10.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_kmeans_pca_2024-12-13_00-11-10.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_kmeans_pca_2024-12-13_00-11-10.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_kmeans_pca_2024-12-13_00-11-14.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_kmeans_pca_2024-12-13_00-11-14.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_kmeans_pca_2024-12-13_00-11-14.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_hier_kmeans_pca_2024-12-13_00-11-25.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_kmeans_pca_2024-12-13_00-11-25.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_hier_kmeans_pca_2024-12-13_00-11-25.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-16-53.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-16-53.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-16-53.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-22-36.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-22-36.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-22-36.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-33-41.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-33-41.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-33-41.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-44-37.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-44-37.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_02-44-37.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-00-57.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-00-57.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-00-57.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-12-10.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-12-10.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-12-10.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-17-49.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-17-49.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-17-49.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-23-05.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-23-05.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-23-05.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-45-13.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-45-13.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-45-13.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-46-02.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-46-02.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-46-02.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-46-18.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-46-18.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-46-18.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-48-46.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-48-46.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_03-48-46.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_04-21-14.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_04-21-14.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_04-21-14.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_04-46-04.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_04-46-04.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_04-46-04.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_04-52-33.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_04-52-33.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_04-52-33.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-17-23.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-17-23.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-17-23.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-30-08.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-30-08.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-30-08.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-30-27.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-30-27.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-30-27.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-31-02.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-31-02.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-31-02.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-31-20.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-31-20.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-31-20.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-31-56.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-31-56.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-31-56.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-32-51.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-32-51.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-32-51.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-33-08.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-33-08.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_05-33-08.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-01-09.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-01-09.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-01-09.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-18-07.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-18-07.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-18-07.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-23-20.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-23-20.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-23-20.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-34-34.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-34-34.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-34-34.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-50-42.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-50-42.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-50-42.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-56-45.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-56-45.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_06-56-45.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-02-32.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-02-32.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-02-32.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-02-49.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-02-49.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-02-49.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-03-05.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-03-05.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-03-05.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-05-02.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-05-02.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-05-02.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-06-39.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-06-39.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_sktime_2024-12-13_07-06-39.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_es_statsmodels_2024-12-13_08-55-32.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_statsmodels_2024-12-13_08-55-32.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_es_statsmodels_2024-12-13_08-55-32.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_09-51-02.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_09-51-02.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_09-51-02.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-02-48.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-02-48.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-02-48.csv obteve melhor R2 com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-31-06.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-31-06.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-31-06.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-40-12.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-40-12.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-40-12.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-58-22.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-58-22.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_sktime_2024-12-13_10-58-22.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_sktime_2024-12-13_11-17-04.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=20, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_sktime_2024-12-13_11-17-04.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_sktime_2024-12-13_11-17-04.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_sktime_2024-12-13_11-21-29.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_sktime_2024-12-13_11-21-29.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_sktime_2024-12-13_11-21-29.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=10, min_samples_leaf=4, min_samples_split=10, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_arima_statsmodels_2024-12-13_11-29-27.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_statsmodels_2024-12-13_11-29-27.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_arima_statsmodels_2024-12-13_11-29-27.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_00-42-50.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_00-42-50.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_00-42-50.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_prophet_2024-12-13_00-50-20.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_00-50-20.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_00-50-20.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_prophet_2024-12-13_01-01-48.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_01-01-48.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_01-01-48.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_prophet_2024-12-13_01-05-33.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_01-05-33.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_01-05-33.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_prophet_2024-12-13_01-13-12.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_01-13-12.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_prophet_2024-12-13_01-13-12.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_es_sktime_2024-12-20_00-55-30.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=10, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_sarima_es_sktime_2024-12-20_00-55-30.csv obteve melhor MSE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_es_sktime_2024-12-20_00-55-30.csv obteve melhor R2 com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_es_statsmodels_2024-12-19_14-47-23.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=2, min_samples_split=5, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_es_statsmodels_2024-12-19_14-47-23.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_es_statsmodels_2024-12-19_14-47-23.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=20, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_sktime_2024-12-20_07-49-41.csv obteve melhor MAE com parametros:
+n_estimators=100, max_depth=20, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_sarima_sktime_2024-12-20_07-49-41.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_sarima_sktime_2024-12-20_07-49-41.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_sarima_sktime_2024-12-20_08-17-21.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_sktime_2024-12-20_08-17-21.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_sktime_2024-12-20_08-17-21.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_sktime_2024-12-20_08-31-03.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_sktime_2024-12-20_08-31-03.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_sktime_2024-12-20_08-31-03.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_statsmodels_2024-12-19_18-16-36.csv obteve melhor MAE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_statsmodels_2024-12-19_18-16-36.csv obteve melhor MSE com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_sarima_statsmodels_2024-12-19_18-16-36.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=6, min_samples_split=2, criterion=squared_error, bootstrap=True
+Arquivo fusao_temp_tslearn_tskmeans_2024-12-13_01-19-02.csv obteve melhor MAE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_tslearn_tskmeans_2024-12-13_01-19-02.csv obteve melhor MSE com parametros:
+n_estimators=150, max_depth=10, min_samples_leaf=4, min_samples_split=2, criterion=squared_error, bootstrap=False
+Arquivo fusao_temp_tslearn_tskmeans_2024-12-13_01-19-02.csv obteve melhor R2 com parametros:
+n_estimators=50, max_depth=5, min_samples_leaf=2, min_samples_split=2, criterion=squared_error, bootstrap=True

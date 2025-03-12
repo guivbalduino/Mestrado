@@ -88,7 +88,7 @@ start_date = pd.to_datetime('2024-03-01')
 fusao_data = {col: load_data_from_mongo(col, start_date) for col in fusao_collections}
 
 # Variáveis para o eixo y
-variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
+variables = ['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
 
 # Diretório base para os gráficos
 output_base_dir = r'./comparativos/mini_graphs/mes_dia_10_20'

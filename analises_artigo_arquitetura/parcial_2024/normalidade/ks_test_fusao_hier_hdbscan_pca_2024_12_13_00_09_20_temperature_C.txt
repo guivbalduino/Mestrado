@@ -1,0 +1,3 @@
+Teste de Kolmogorov-Smirnov para temperature_C em fusao_hier_hdbscan_pca_2024-12-13_00-09-20:
+Estatística: 1.0, P-valor: 0.0
+Distribuição não normal

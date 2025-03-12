@@ -1,0 +1,3 @@
+Teste de Kolmogorov-Smirnov para pressure_hPa em fusao_hier_fastcluster_pca_2024-12-13_00-05-55:
+Estatística: 1.0, P-valor: 0.0
+Distribuição não normal

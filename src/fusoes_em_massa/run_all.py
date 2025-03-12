@@ -10,9 +10,9 @@
 #from temporal.fusao_temporal_arima_statsmodels import run_temp_stats_arima
 #from temporal.fusao_temporal_prophet import run_temp_prophet
 from temporal.fusao_temporal_sarima_exponential_sktime import run_temp_sk_sarima_ex
-from temporal.fusao_temporal_sarima_exponential_statsmodels import run_temp_stats_sarima_ex
+#from temporal.fusao_temporal_sarima_exponential_statsmodels import run_temp_stats_sarima_ex
 from temporal.fusao_temporal_sarima_sktime import run_temp_sk_sarima
-from temporal.fusao_temporal_sarima_statsmodels import run_temp_stats_sarima
+#from temporal.fusao_temporal_sarima_statsmodels import run_temp_stats_sarima
 #from temporal.fusao_temporal_Tslearn_KMeans import run_temp_ts_kmeans
 
 
@@ -35,10 +35,10 @@ print('''
 ##run_temp_sk_arima()
 ##run_temp_stats_arima()
 ##run_temp_prophet()
-#run_temp_sk_sarima_ex()
-run_temp_stats_sarima_ex()
-#run_temp_sk_sarima()
-run_temp_stats_sarima()
+##run_temp_sk_sarima_ex()
+##run_temp_stats_sarima_ex()
+run_temp_sk_sarima()
+#run_temp_stats_sarima()
 ##run_temp_ts_kmeans()
 
 print('''

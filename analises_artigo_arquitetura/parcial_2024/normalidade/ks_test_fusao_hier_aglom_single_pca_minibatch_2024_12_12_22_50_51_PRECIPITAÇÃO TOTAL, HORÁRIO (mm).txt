@@ -1,0 +1,3 @@
+Teste de Kolmogorov-Smirnov para PRECIPITAÇÃO TOTAL, HORÁRIO (mm) em fusao_hier_aglom_single_pca_minibatch_2024-12-12_22-50-51:
+Estatística: 0.5, P-valor: 0.0
+Distribuição não normal

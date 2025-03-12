@@ -87,41 +87,42 @@ def aplicar_sarima(
 
 def run_temp_sk_sarima():
     # Definições dos parâmetros
-    freq_resample_options = ["D"]  # Frequência de reamostragem
+    freq_resample_options = ["H"]  # Frequência de reamostragem
     interpolacao_options = [True]  # Usar interpolação ou não
     order_options = [(1, 1, 1), (2, 1, 1), (1, 0, 1)]  # Ordens para ARIMA
     seasonal_order_options = [
-        (1, 1, 0, 12),
-        (0, 1, 1, 24),
-        (1, 0, 1, 24),
+        (1, 0, 0, 24),
+        (0, 1, 0, 24),
+        (0, 0, 1, 24),
+        (1, 1, 1, 24),
     ]  # Ordens sazonais
-    trend_options = ["c", "t", "n"]  # C para constante, t para tendência, n para nenhum
-    measurement_error = [True]
-    time_varying_regression = [True]
-    mle_regression = [False]
-    simple_differencing = [True]
-    enforce_stationarity = [False]
-    enforce_invertibility = [False]
-    hamilton_representation = [False]
-    concentrate_scale = [False]
-    missing = ["none"]
-    validate_specification = [False]
-    disp = [False]
-    random_state = [42]  # Exemplo de semente aleatória
-    start_params = [None]  # Exemplos de parâmetros iniciais
-    transformed = [False]
-    includes_fixed = [False]
-    cov_type = [None]
-    cov_kwds = [None]
-    method = ["lbfgs"]
+    trend_options = ["c"]  # C para constante, t para tendência, n para nenhum
+    measurement_error = True
+    time_varying_regression = False
+    mle_regression = True
+    simple_differencing = False
+    enforce_stationarity = False
+    enforce_invertibility = False
+    hamilton_representation = False
+    concentrate_scale = True
+    missing = "none"
+    validate_specification = False
+    disp = False
+    random_state = 42  # Exemplo de semente aleatória
+    start_params = None  # Exemplos de parâmetros iniciais
+    transformed = False
+    includes_fixed = False
+    cov_type = None
+    cov_kwds = None
+    method = "lbfgs"
     maxiter_options = [50, 100]  # Exemplos de iterações máximas
-    full_output = [0]
-    callback = [None]
-    return_params = [False]
-    optim_score_options = ["mse", "mae"]
-    optim_complex_step = [True]
-    optim_hessian = [True]
-    low_memory = [True]
+    full_output = 0
+    callback = None
+    return_params = False
+    optim_score_options = [None]
+    optim_complex_step = None
+    optim_hessian = True
+    low_memory = True
     trend_offset = 1
     use_exact_diffuse = False
     dates = None
@@ -134,7 +135,6 @@ def run_temp_sk_sarima():
                 for seasonal_order in seasonal_order_options:
                     for trend in trend_options:
                         for optim_score in optim_score_options:
-
                             for maxiter in maxiter_options:
 
                                 # Obter o nome do computador

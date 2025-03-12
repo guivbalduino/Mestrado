@@ -84,7 +84,7 @@ inmet_data = load_data_from_mongo('inmet')
 libelium_data = load_data_from_mongo('libelium')
 
 # Variáveis para a análise de outliers
-variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
+variables = ['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
 
 # Diretórios de saída para os gráficos
 base_dir = r'.\analises_artigo_arquitetura\parcial_2024'

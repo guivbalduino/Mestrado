@@ -93,6 +93,10 @@ def train_and_predict(collection_name,hoje):
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
 
+
+
+
+
     fim_modelagem = datetime.now()
     tempo_modelagem = fim_modelagem - inicio_modelagem
 

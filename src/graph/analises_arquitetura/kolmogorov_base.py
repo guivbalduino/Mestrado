@@ -64,16 +64,19 @@ inmet_data = load_data_from_mongo('inmet')
 libelium_data = load_data_from_mongo('libelium')
 
 # Filtrar as colunas relevantes
-columns_to_keep = ['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa']
+columns_to_keep = ['timestamp', 'temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
 inmet_data = inmet_data[columns_to_keep]
-libelium_data = libelium_data[columns_to_keep]
+libelium_data = libelium_data[columns_to_keep[:-1]]
 
 # Variáveis para a análise de normalidade
-variables = ['temperature_C', 'humidity_percent', 'pressure_hPa']
+variables = ['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
 
 # Realizando o Teste de Kolmogorov-Smirnov para inmet e libelium e plotando os gráficos
 for label, dataset in {'inmet': inmet_data, 'libelium': libelium_data}.items():
     for variable in variables:
+        if variable not in dataset.columns:
+            print(f"A variável '{variable}' não está presente no conjunto de dados '{label}'. Pulando...\n")
+            continue
         try:
             # Realizando o Teste de Kolmogorov-Smirnov
             stat, p_value = kolmogorov_smirnov_test(dataset, variable)

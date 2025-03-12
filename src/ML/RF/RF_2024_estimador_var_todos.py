@@ -7,6 +7,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 from datetime import datetime
 import csv
+import joblib
 
 # Função para verificar e criar diretórios, se necessário
 def ensure_directory_exists(directory):
@@ -58,6 +59,39 @@ def extract_time_features(data):
     data['minute'] = data['timestamp'].dt.minute
     return data
 
+
+def save_model_info(collection_name, model_params, eval_metrics, tempo_modelagem, tempo_armazenamento, hoje, quantidade_dados_utilizados,model_path):
+    client = MongoClient("localhost", 27017)
+    db = client["dados"]
+    colecao_fusoes = db["resultados_modelagem"]
+
+    # Dados para armazenar no MongoDB
+    info_modelagem = {
+        "nome_modelagem": "random_forest_regressor",
+        "tipo_modelagem": "previsao_temperatura",
+        "quantidade_dados_utilizados": quantidade_dados_utilizados,  # Usa o novo parâmetro
+        "tempo_modelagem_segundos": tempo_modelagem.total_seconds(),
+        "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
+        "data_hora": hoje,
+        "collection": collection_name,
+        "local_modelo":model_path,
+        # parâmetros do modelo
+        "n_estimators": model_params["n_estimators"],
+        "max_depth": model_params["max_depth"],
+        "min_samples_leaf": model_params["min_samples_leaf"],
+        "min_samples_split": model_params["min_samples_split"],
+        "criterion": model_params["criterion"],
+        "random_state": model_params["random_state"],
+        "bootstrap": model_params["bootstrap"],
+        # Métricas de avaliação
+        "mean_absolute_error": eval_metrics["mae"],
+        "mean_squared_error": eval_metrics["mse"],
+        "r2_score": eval_metrics["r2"],
+    }
+    colecao_fusoes.insert_one(info_modelagem)
+    print("Informações de avaliação e parâmetros armazenadas no MongoDB com sucesso.")
+
+
 # Função para treinar e prever com Random Forest
 def train_and_predict_rf(           collection_name, 
                                     hoje, 
@@ -69,6 +103,8 @@ def train_and_predict_rf(           collection_name,
                                     bootstrap,
                                     random_state
                                 ):
+    
+    inicio_modelagem = datetime.now()
     # Carregar dados
     data = load_data_from_mongo(collection_name)
 
@@ -76,10 +112,10 @@ def train_and_predict_rf(           collection_name,
     data = extract_time_features(data)
 
     # Definir variável alvo (temperatura) e características
-    y = data['temperature_C']
+    y = data["PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]
     
     # Selecionando variáveis para X (humidade, pressão, cluster_label se disponível, e componentes temporais)
-    X = data[['humidity_percent', 'pressure_hPa', 'year', 'month', 'day', 'hour', 'minute']]  # Variáveis para previsão
+    X = data[['temperature_C','humidity_percent', 'pressure_hPa', 'year', 'month', 'day', 'hour', 'minute']]  # Variáveis para previsão
     
     if 'cluster_label' in data.columns:
         X['cluster_label'] = data['cluster_label']  # Adicionando cluster_label, se existir
@@ -111,6 +147,111 @@ def train_and_predict_rf(           collection_name,
     r2 = r2_score(y_test, y_pred)
 
     print(f"Resultados: MAE={mae:.2f}, MSE={mse:.2f}, R²={r2:.4f}")
+
+    fim_modelagem = datetime.now()
+    tempo_modelagem = fim_modelagem - inicio_modelagem
+    inicio_armazenamento = datetime.now()
+    # Diretório para salvar previsões e modelo
+    base_dir = f"./previsoes/2024/RF/{sanitize_directory_name(hoje)}/{sanitize_directory_name(collection_name)}"
+    os.makedirs(base_dir, exist_ok=True)
+
+    # Salvar modelo
+    model_path = os.path.join(base_dir, f"{sanitize_directory_name(collection_name)}_rf_model.joblib")
+    joblib.dump(rf_model, model_path)
+    print(f"Modelo salvo em: {model_path}")
+    fim_armazenamento = datetime.now()
+    tempo_armazenamento = fim_armazenamento - inicio_armazenamento
+
+    # Salvar informações do modelo e avaliação no MongoDB
+    model_params = {
+        "collection_name":collection_name,
+        "n_estimators": n_estimators,
+        "max_depth": max_depth,
+        "min_samples_leaf": min_samples_leaf,
+        "min_samples_split": min_samples_split,
+        "criterion": criterion,
+        "random_state": 42,
+        "bootstrap": bootstrap,
+        "y_train": y_train.shape[0]
+    }
+    eval_metrics = {
+        "mae": mae,
+        "mse": mse,
+        "r2": r2
+    }
+    # Antes de chamar a função save_model_info
+    quantidade_dados_utilizados = len(y_train)  # Ajuste se necessário para refletir a variável correta
+
+    # E passe quantidade_dados_utilizados para save_model_info
+    save_model_info(collection_name, model_params, eval_metrics, tempo_modelagem, tempo_armazenamento, hoje, quantidade_dados_utilizados,model_path)
+
+    print(f"Modelo e informações armazenados para a coleção: {collection_name}")
+
+    # Ajustar a correspondência entre as previsões e as datas
+    X_test_dates = data.loc[X_test.index, 'timestamp']  # Obter as datas reais de X_test
+    
+    # Plotar previsões e valores reais
+    plt.figure(figsize=(10, 5))
+    plt.plot(X_test_dates, y_test.values, label="Real", color='blue')
+    plt.plot(X_test_dates, y_pred, label="Previsto", color='red')
+    
+    plt.xlabel("Data")
+    plt.ylabel("Temperatura (°C)")
+    plt.title(f"Previsão de Temperatura - Random Forest - {collection_name}")
+    plt.legend()
+    
+    # Formatar o eixo X para exibir as datas de forma legível
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig(os.path.join(base_dir, "previsao_temperatura.png"), dpi=300)
+    plt.close()
+
+    plt.figure(figsize=(8, 6))
+    metrics = ['MAE', 'MSE', 'R2']
+    values = [mae, mse, r2]
+    plt.bar(metrics, values, color=['blue', 'orange', 'green'])
+
+    # Adicionar valores acima das barras
+    [plt.text(i, v, f"{v:.2f}", ha='center', va='bottom') for i, v in enumerate(values)]
+
+    plt.title(f"Avaliação do Modelo - {collection_name}")
+    plt.ylabel("Valor")
+    plt.tight_layout()
+    plt.savefig(os.path.join(base_dir, "avaliacao_modelo.png"), bbox_inches='tight', dpi=300)
+    plt.close()
+    
+    # Gráfico de resíduos (Erro entre previsões e valores reais)
+    residuals = y_test - y_pred
+    plt.figure(figsize=(10, 5))
+    plt.scatter(X_test_dates, residuals, color='red', label='Resíduos')
+    plt.axhline(y=0, color='black', linestyle='--', label='Zero')
+    plt.xlabel("Data")
+    plt.ylabel("Resíduo (Erro)")
+    plt.title(f"Resíduos do Modelo - {collection_name}")
+    plt.legend()
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig(os.path.join(base_dir, "residuos_modelo.png"), dpi=300)
+    plt.close()
+
+    # Gráfico de Todos os Dados Juntos com Previsão
+    plt.figure(figsize=(10, 5))
+    plt.plot(data['timestamp'], data['temperature_C'], label="Todos os Dados Reais", color='blue', alpha=0.5)
+    plt.plot(X_test_dates, y_pred, label="Previsões - Random Forest", color='red')
+    
+    plt.xlabel("Data")
+    plt.ylabel("Temperatura (°C)")
+    plt.title(f"Todos os Dados e Previsão - {collection_name}")
+    plt.legend()
+    
+    # Formatar o eixo X para exibir as datas de forma legível
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig(os.path.join(base_dir, "todos_dados_com_previsao.png"), dpi=300)
+    plt.close()
+
+    print(f"Gráficos de previsão, avaliação, resíduos e todos os dados salvos em: {base_dir}")
+
     
     # Salvar modelo e gráficos conforme o original (opcional)
 
@@ -125,9 +266,9 @@ if __name__ == "__main__":
 
     # Valores para os hiperparâmetros
     n_estimators_values = [50, 100, 150]
-    max_depth_values = [5, 10]
-    min_samples_leaf_values = [2, 4]
-    min_samples_split_values = [2,10]
+    max_depth_values = [5, 10, 20]
+    min_samples_leaf_values = [2, 4, 6]
+    min_samples_split_values = [2,5,10]
     criterion_values = ['squared_error']
     bootstrap_values = [True, False]  # Inclua se quiser variar também o bootstrap
     random_state = 42

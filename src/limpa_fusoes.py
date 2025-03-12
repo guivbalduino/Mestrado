@@ -9,7 +9,7 @@ colecoes = db.list_collection_names()
 
 # Iterar sobre as coleções e dropar as que começam com "fusao_"
 for colecao in colecoes:
-    if colecao.startswith("fusao_temp_arima_es_statsmodels_"):
+    if colecao.startswith("fusao_temp_sarima_es_sktime"):
         db.drop_collection(colecao)
         print(f"Coleção {colecao} foi removida.")
 

@@ -60,9 +60,10 @@ def run_temp_stats_sarima():
     interpolacao_options = [True]  # Interpolação ou não
     order_options = [(1, 1, 1), (2, 1, 1), (1, 0, 1)]  # Ordens para ARIMA
     seasonal_order_options = [
-        (1, 1, 0, 24),
-        (0, 1, 1, 24),
-        (1, 0, 1, 24),
+        (1, 0, 0, 24),
+        (0, 1, 0, 24),
+        (0, 0, 1, 24),
+        (1, 1, 1, 24),
     ]  # Ordens sazonais
     exog = None  # Variáveis exógenas
     trend_options = ['t','c','n']  # Tendências
@@ -73,7 +74,7 @@ def run_temp_stats_sarima():
     enforce_stationarity = False  # Forçar estacionariedade
     enforce_invertibility = False  # Forçar invertibilidade
     hamilton_representation = False  # Representação de Hamilton
-    concentrate_scale = False  # Concentrar escala
+    concentrate_scale = True  # Concentrar escala
     trend_offset_options = [1]  # Deslocamento de tendência
     use_exact_diffuse = False  # Usar difusão exata
     dates = None  # Exemplos de datas

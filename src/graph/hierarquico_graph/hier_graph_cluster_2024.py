@@ -81,7 +81,7 @@ for nome_colecao in colecoes_fusao_hier:
     pca = joblib.load(pca_path)
 
     # Aplicar PCA aos dados para a visualização
-    df_features = df[['temperature_C', 'humidity_percent', 'pressure_hPa']]
+    df_features = df[['temperature_C', 'humidity_percent', 'pressure_hPa',"PRECIPITAÇÃO TOTAL, HORÁRIO (mm)"]]
     df_pca = pca.transform(df_features)
     df_pca_df = pd.DataFrame(df_pca, columns=[f'PC{i+1}' for i in range(df_pca.shape[1])])
     df_pca_df['cluster_label'] = df['cluster_label']
