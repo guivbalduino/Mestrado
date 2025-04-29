@@ -1,0 +1,2 @@
+Collection Name,Best MAE,Best Params MAE,Best MSE,Best Params MSE,Best R²,Best Params R²
+inmet,0.014750121300339643,"{'n_estimators': 50, 'max_depth': 10, 'min_samples_leaf': 2, 'min_samples_split': 2, 'criterion': 'squared_error', 'bootstrap': False}",0.028088466672301672,"{'n_estimators': 100, 'max_depth': 20, 'min_samples_leaf': 2, 'min_samples_split': 2, 'criterion': 'squared_error', 'bootstrap': True}",0.647449511024191,"{'n_estimators': 100, 'max_depth': 20, 'min_samples_leaf': 2, 'min_samples_split': 2, 'criterion': 'squared_error', 'bootstrap': True}"

@@ -1,3 +1,0 @@
-Teste de Kolmogorov-Smirnov para PRECIPITAÇÃO TOTAL, HORÁRIO (mm) em inmet:
-Estatística: 0.5, P-valor: 0.0
-Distribuição não normal

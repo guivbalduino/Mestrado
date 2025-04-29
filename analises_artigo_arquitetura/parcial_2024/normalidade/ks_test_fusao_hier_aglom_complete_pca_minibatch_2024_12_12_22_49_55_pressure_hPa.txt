@@ -1,3 +1,0 @@
-Teste de Kolmogorov-Smirnov para pressure_hPa em fusao_hier_aglom_complete_pca_minibatch_2024-12-12_22-49-55:
-Estatística: 1.0, P-valor: 0.0
-Distribuição não normal

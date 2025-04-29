@@ -1,3 +1,0 @@
-Teste de Kolmogorov-Smirnov para PRECIPITAÇÃO TOTAL, HORÁRIO (mm) em fusao_temp_arima_es_sktime_2024-12-13_04:39-14:
-Estatística: 0.45362836835913534, P-valor: 0.0
-Distribuição não normal

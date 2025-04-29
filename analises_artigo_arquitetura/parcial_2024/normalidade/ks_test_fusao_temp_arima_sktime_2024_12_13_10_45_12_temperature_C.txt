@@ -1,3 +1,0 @@
-Teste de Kolmogorov-Smirnov para temperature_C em fusao_temp_arima_sktime_2024-12-13_10:45-12:
-Estatística: 0.2252900014145325, P-valor: 1.1975179981459963e-263
-Distribuição não normal

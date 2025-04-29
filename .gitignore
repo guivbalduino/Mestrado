@@ -1,6 +1,6 @@
 \venv
-*.csv
-\hivemq
 *.msi
 \__pycache__
 *.zip
+.joblib
+previsoes/**/*.png

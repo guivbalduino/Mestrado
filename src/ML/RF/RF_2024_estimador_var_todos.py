@@ -19,7 +19,7 @@ output_dir = os.path.join("comparativos", "estimadores", "RF")
 ensure_directory_exists(output_dir)
 
 # Função para carregar dados de uma coleção MongoDB com filtro e tratamento do timestamp
-def load_data_from_mongo(collection_name, filter_date="2024-03-01"):
+def load_data_from_mongo(collection_name, start_date="2024-02-14", end_date="2024-09-02"):
     client = MongoClient("localhost", 27017)
     db = client["dados"]
     collection = db[collection_name]
@@ -34,9 +34,7 @@ def load_data_from_mongo(collection_name, filter_date="2024-03-01"):
         else:
             raise ValueError("Formato da coluna 'timestamp' não reconhecido.")
     
-    # Filtrar por data se necessário
-    if filter_date:
-        data = data[data['timestamp'] >= filter_date]
+    data = data[(data['timestamp'] >= pd.to_datetime(start_date)) & (data['timestamp'] <= pd.to_datetime(end_date))]
     
     return data
 
@@ -44,7 +42,7 @@ def load_data_from_mongo(collection_name, filter_date="2024-03-01"):
 def get_fusao_collections():
     client = MongoClient("localhost", 27017)
     db = client["dados"]
-    return [col for col in db.list_collection_names() if col.startswith('fusao_')]
+    return [col for col in db.list_collection_names() if col.startswith('fusao_temp')]
 
 # Função para sanitizar nomes de arquivos/diretórios e substituir ":" por "-"
 def sanitize_directory_name(name):
@@ -68,7 +66,7 @@ def save_model_info(collection_name, model_params, eval_metrics, tempo_modelagem
     # Dados para armazenar no MongoDB
     info_modelagem = {
         "nome_modelagem": "random_forest_regressor",
-        "tipo_modelagem": "previsao_temperatura",
+        "tipo_modelagem": "previsao_precipitaçao",
         "quantidade_dados_utilizados": quantidade_dados_utilizados,  # Usa o novo parâmetro
         "tempo_modelagem_segundos": tempo_modelagem.total_seconds(),
         "tempo_armazenamento_segundos": tempo_armazenamento.total_seconds(),
@@ -106,7 +104,7 @@ def train_and_predict_rf(           collection_name,
     
     inicio_modelagem = datetime.now()
     # Carregar dados
-    data = load_data_from_mongo(collection_name)
+    data = load_data_from_mongo(collection_name, start_date="2024-02-13", end_date="2024-09-03")
 
     # Extrair características temporais do 'timestamp'
     data = extract_time_features(data)

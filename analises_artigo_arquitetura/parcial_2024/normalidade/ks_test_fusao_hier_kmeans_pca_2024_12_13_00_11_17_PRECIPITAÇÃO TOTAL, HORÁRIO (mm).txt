@@ -1,3 +1,0 @@
-Teste de Kolmogorov-Smirnov para PRECIPITAÇÃO TOTAL, HORÁRIO (mm) em fusao_hier_kmeans_pca_2024-12-13_00-11-17:
-Estatística: 0.5, P-valor: 0.0
-Distribuição não normal

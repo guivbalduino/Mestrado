@@ -1,3 +1,0 @@
-Teste de Kolmogorov-Smirnov para humidity_percent em fusao_temp_arima_es_sktime_2024-12-13_03:56-25:
-Estatística: 0.13280558793287056, P-valor: 3.21543171018354e-91
-Distribuição não normal
