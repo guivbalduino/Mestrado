@@ -94,25 +94,50 @@ def create_summary_bar(metric, summary):
     summary_df = pd.DataFrame(summary)
     if summary_df.empty:
         return
+
     summary_df[metric] = summary_df[metric].clip(lower=0)
+
+    sorted_values = summary_df[metric].sort_values(ascending=(metric != 'r2')).unique()
+    best_value = sorted_values[0] if len(sorted_values) > 0 else None
+    second_best_value = sorted_values[1] if len(sorted_values) > 1 else None
+
     plt.figure(figsize=(14, 10))
     bar_colors = ['#FFA500' if name == 'inmet' else colors[metric] for name in summary_df['fusao_name']]
     bars = plt.bar(summary_df['fusao_name'], summary_df[metric], color=bar_colors, width=0.6)
-    best_value = summary_df[metric].max() if metric == 'r2' else summary_df[metric].min()
+
     plt.ylim(0, summary_df[metric].max() * 1.2)
     plt.title(f"Resumo dos Melhores Valores por Fusão\nMétrica: {metric.upper()}")
     plt.ylabel(metric.upper())
     plt.xlabel("Fusões")
 
+    second_best_marked = False
+
     for bar, value in zip(bars, summary_df[metric]):
         text_x = bar.get_x() + bar.get_width() / 2.0
         text_y = bar.get_height() + 0.02 * summary_df[metric].max()
-        plt.text(text_x, text_y, f'{value:.4f}', ha='center', va='bottom', fontsize=10,
-                 color='green' if value == best_value else 'red' if value == 0 else 'black')
+
+        if value == best_value:
+            text_color = 'green'
+        elif value == second_best_value and not second_best_marked:
+            text_color = 'blue'
+        elif value == 0:
+            text_color = 'red'
+        else:
+            text_color = 'black'
+
+        plt.text(text_x, text_y, f'{value:.4f}', ha='center', va='bottom', fontsize=10, color=text_color)
+
         if value == best_value:
             plt.annotate('Melhor', xy=(text_x, text_y + 0.05 * summary_df[metric].max()),
-                         xytext=(0, 20), textcoords='offset points',
-                         arrowprops=dict(arrowstyle="->", color='black'), ha='center')
+                         xytext=(0, 10) if metric == 'r2' else (0, 20),
+                         textcoords='offset points',
+                         arrowprops=dict(arrowstyle="->", color='green'), ha='center')
+        elif value == second_best_value and not second_best_marked:
+            plt.annotate('2º Melhor', xy=(text_x, text_y + 0.05 * summary_df[metric].max()),
+                         xytext=(0, 10) if metric == 'r2' else (0, 30),
+                         textcoords='offset points',
+                         arrowprops=dict(arrowstyle="->", color='blue'), ha='center')
+            second_best_marked = True
 
     plt.xticks(rotation=60, ha='right')
     plt.tight_layout()
@@ -120,8 +145,10 @@ def create_summary_bar(metric, summary):
     plt.close()
 
 
+
+
+
 def create_filtered_summary_bar(metric, summary, fusao_prefix):
-    # Filtra fusões cujo nome começa com 'fusao_prefix' e também mantém 'inmet'
     filtered_summary = [
         item for item in summary
         if item['fusao_name'].startswith(fusao_prefix) or item['fusao_name'] == 'inmet'
@@ -129,8 +156,7 @@ def create_filtered_summary_bar(metric, summary, fusao_prefix):
     summary_df = pd.DataFrame(filtered_summary)
     if summary_df.empty:
         return
-    
-    # Define o tipo de fusão com base no prefixo
+
     if 'temp' in fusao_prefix:
         fusion_type = "Fusão Temporal"
     elif 'hier' in fusao_prefix:
@@ -139,24 +165,48 @@ def create_filtered_summary_bar(metric, summary, fusao_prefix):
         fusion_type = "Fusões"
 
     summary_df[metric] = summary_df[metric].clip(lower=0)
+
+    sorted_values = summary_df[metric].sort_values(ascending=(metric != 'r2')).unique()
+    best_value = sorted_values[0] if len(sorted_values) > 0 else None
+    second_best_value = sorted_values[1] if len(sorted_values) > 1 else None
+
     plt.figure(figsize=(10, 8))
     bar_colors = ['#FFA500' if name == 'inmet' else colors[metric] for name in summary_df['fusao_name']]
     bars = plt.bar(summary_df['fusao_name'], summary_df[metric], color=bar_colors, width=0.6)
-    best_value = summary_df[metric].max() if metric == 'r2' else summary_df[metric].min()
-    plt.ylim(0, summary_df[metric].max() * 1.2)
+
+    plt.ylim(0, summary_df[metric].max() * 1.3)
     plt.title(f"Melhores Valores: {fusion_type} vs INMET\nMétrica: {metric.upper()}")
     plt.ylabel(metric.upper())
     plt.xlabel("Tipo de Fusão")
 
+    second_best_marked = False
+
     for bar, value in zip(bars, summary_df[metric]):
         text_x = bar.get_x() + bar.get_width() / 2.0
         text_y = bar.get_height() + 0.02 * summary_df[metric].max()
-        plt.text(text_x, text_y, f'{value:.4f}', ha='center', va='bottom',
-                 color='green' if value == best_value else 'red' if value == 0 else 'black')
+
+        if value == best_value:
+            text_color = 'green'
+        elif value == second_best_value and not second_best_marked:
+            text_color = 'blue'
+        elif value == 0:
+            text_color = 'red'
+        else:
+            text_color = 'black'
+
+        plt.text(text_x, text_y, f'{value:.4f}', ha='center', va='bottom', fontsize=12, color=text_color)
+
         if value == best_value:
             plt.annotate('Melhor', xy=(text_x, text_y + 0.05 * summary_df[metric].max()),
-                         xytext=(0, 20), textcoords='offset points',
-                         arrowprops=dict(arrowstyle="->", color='black'), ha='center')
+                         xytext=(0, 15) if metric == 'r2' else (0, 30),
+                         textcoords='offset points',
+                         arrowprops=dict(arrowstyle="->", color='green'), ha='center')
+        elif value == second_best_value and not second_best_marked:
+            plt.annotate('2º Melhor', xy=(text_x, text_y + 0.05 * summary_df[metric].max()),
+                         xytext=(0, 15) if metric == 'r2' else (0, 30),
+                         textcoords='offset points',
+                         arrowprops=dict(arrowstyle="->", color='blue'), ha='center')
+            second_best_marked = True
 
     plt.xticks(rotation=60, ha='right')
     plt.tight_layout()
